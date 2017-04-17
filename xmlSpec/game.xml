@@ -1,0 +1,311 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation. 
+     So make sure to include your name as part of the screenTitle -->
+<screenTitle>Malloy: Coin Diver Extraordinaire</screenTitle>
+<title>Malloy: Coin Diver Extraordinaire</title>
+<name>Chase Conklin</name>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+<numBack>20</numBack>
+<numMiddle>20</numMiddle>
+<numFront>20</numFront>
+
+<maxFrames>500</maxFrames>
+<username>caconkl</username>
+
+<view>
+  <width>1024</width>
+  <height>600</height>
+</view>
+
+<world>
+  <width>3000</width>
+  <height>960</height>
+</world>
+
+<back>
+  <file>images/checkerboard.bmp</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</back>
+
+<spongebobFront>
+  <file>images/a22.png</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</spongebobFront>
+
+<spongebobMiddle>
+  <file>images/b22.png</file>
+  <factor>2</factor>
+  <transparency>false</transparency>
+</spongebobMiddle>
+
+<spongebobBack>
+  <file>images/c22.png</file>
+  <factor>3</factor>
+  <transparency>false</transparency>
+</spongebobBack>
+
+<diverFront>
+  <file>images/a.png</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</diverFront>
+
+<diverMiddle>
+  <file>images/b.png</file>
+  <factor>2</factor>
+  <transparency>false</transparency>
+</diverMiddle>
+
+<diverBack>
+  <file>images/c.png</file>
+  <factor>3</factor>
+  <transparency>false</transparency>
+</diverBack>
+
+<yeeFront>
+  <file>images/a3.png</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</yeeFront>
+
+<yeeMiddle>
+  <file>images/b3.png</file>
+  <factor>2</factor>
+  <transparency>false</transparency>
+</yeeMiddle>
+
+<yeeBack>
+  <file>images/c3.png</file>
+  <factor>3</factor>
+  <transparency>false</transparency>
+</yeeBack>
+
+<font name="font">
+  <file>fonts/arial.ttf</file>
+  <size>24</size>
+  <red>255</red>
+  <green>255</green>
+  <blue>255</blue>
+  <alpha>0</alpha>
+</font>
+
+
+<diver>
+  <file>images/diver2.png</file>
+  <startLoc x="300" y="300"/>
+  <frames>8</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>200</speedY>
+  <transparency>true</transparency>
+</diver>
+
+<diverLeft>
+  <file>images/diver2Left.png</file>
+  <frames>8</frames>
+</diverLeft>
+
+<spongebob>
+  <file>images/spongebob.png</file>
+  <startLoc x="300" y="300"/>
+  <frames>8</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>200</speedY>
+  <transparency>true</transparency>
+</spongebob>
+
+<spongebobLeft>
+  <file>images/spongebobLeft.png</file>
+  <frames>8</frames>
+</spongebobLeft>
+
+<coin>
+  <file>images/coins2.png</file>
+  <startLoc x="80" y="80"/>
+  <frames>7</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>200</speedY>
+  <transparency>true</transparency>
+</coin>
+
+<fish>
+  <file>images/fish.png</file>
+  <startLoc x="400" y="400"/>
+  <frames>6</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-150</speedX>
+  <speedY>150</speedY>
+  <transparency>true</transparency>
+</fish>
+
+<fishLeft>
+  <file>images/fishLeft.png</file>
+  <frames>6</frames>
+</fishLeft>
+
+<seagull>
+  <file>images/seagull.png</file>
+  <startLoc x="400" y="400"/>
+  <frames>9</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-150</speedX>
+  <speedY>150</speedY>
+  <transparency>true</transparency>
+</seagull>
+
+<seagullLeft>
+  <file>images/seagullLeft.png</file>
+  <frames>9</frames>
+</seagullLeft>
+
+<tuna>
+  <file>images/tuna.png</file>
+  <startLoc x="200" y="200"/>
+  <frames>8</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-150</speedX>
+  <speedY>150</speedY>
+  <transparency>true</transparency>
+</tuna>
+
+<tunaLeft>
+  <file>images/tunaLeft.png</file>
+  <frames>8</frames>
+</tunaLeft>
+
+<malloy>
+  <file>images/malloy.png</file>
+  <startLoc x="160" y="800"/>
+  <frames>3</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>200</speedY>
+  <transparency>true</transparency>
+</malloy>
+
+<malloyLeft>
+  <file>images/malloyLeft.png</file>
+  <frames>3</frames>
+</malloyLeft>
+
+<bigJelly>
+  <file>images/bigJelly.png</file>
+  <startLoc x="600" y="600"/>
+  <frames>8</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>200</speedY>
+  <transparency>true</transparency>
+</bigJelly>
+
+<bigJellyLeft>
+  <file>images/bigJelly.png</file>
+  <frames>8</frames>
+</bigJellyLeft>
+
+<yee>
+  <file>images/yee.png</file>
+  <startLoc x="600" y="600"/>
+  <frames>6</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>200</speedY>
+  <transparency>true</transparency>
+</yee>
+
+<yeeLeft>
+  <file>images/yeeLeft.png</file>
+  <frames>6</frames>
+</yeeLeft>
+
+<angler>
+  <file>images/angler.png</file>
+  <startLoc x="200" y="200"/>
+  <frames>6</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>200</speedY>
+  <transparency>true</transparency>
+</angler>
+
+<anglerLeft>
+  <file>images/anglerLeft.png</file>
+  <frames>6</frames>
+</anglerLeft>
+
+<jelly>
+  <file>images/jelly3.png</file>
+  <startLoc x="200" y="200"/>
+  <frames>6</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>200</speedY>
+  <transparency>true</transparency>
+</jelly>
+
+<jellyLeft>
+  <file>images/jelly3.png</file>
+  <frames>6</frames>
+</jellyLeft>
+
+<flyDino>
+  <file>images/flyDino.png</file>
+  <startLoc x="200" y="200"/>
+  <frames>6</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>200</speedY>
+  <transparency>true</transparency>
+</flyDino>
+
+<flyDinoLeft>
+  <file>images/flyDinoLeft.png</file>
+  <frames>6</frames>
+</flyDinoLeft>
+
+<missle>
+  <file>images/missle.png</file>
+  <startLoc x="100" y="100"/>
+  <frames>13</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</missle>
+
+<missleLeft>
+  <file>images/missleLeft.png</file>
+  <frames>13</frames>
+</missleLeft>
+
+<mine>
+  <file>images/mine.png</file>
+  <startLoc x="100" y="100"/>
+  <frames>1</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>0</speedX>
+  <speedY>100</speedY>
+  <transparency>true</transparency>
+</mine>
+
+<mineLeft>
+  <file>images/mine.png</file>
+  <frames>1</frames>
+</mineLeft>
+
+<hud>
+  <startLoc x="15" y="60"/>
+  <width>200</width>
+  <height>170</height>
+  <transparency>true</transparency>
+</hud>
+
+</GameData>
