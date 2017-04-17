@@ -1,6 +1,6 @@
 
-# .v4p backup files
-*~.xml
+# ignore these 
+*.o
+run
+*~
 
-# Dynamic plugins .dll
-bin/
