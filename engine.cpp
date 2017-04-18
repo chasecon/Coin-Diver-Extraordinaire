@@ -191,27 +191,27 @@ std::vector<Drawable*>::iterator ptr = spritesBack.begin();
 
   spritesFront.push_back( new TurningMultiSprite(villian,1.0,3.0));
   spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));  
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));  
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("missle"));  
+  spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("missle"));  
+  spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("missle"));
   spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.2));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
 
 
 

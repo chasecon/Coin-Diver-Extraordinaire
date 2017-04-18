@@ -9,9 +9,9 @@
 
 <frameCapOn>true</frameCapOn>
 <period>17</period>
-<numBack>1</numBack>
-<numMiddle>1</numMiddle>
-<numFront>1</numFront>
+<numBack>20</numBack>
+<numMiddle>20</numMiddle>
+<numFront>20</numFront>
 
 <maxFrames>500</maxFrames>
 <username>caconkl</username>
