@@ -125,7 +125,7 @@ bool PerPixelCollisionStrategy::execute(
   const Frame * const frame2 = obj2.getFrame();
   Uint16 width2 = scale2*frame2->getWidth();
   Uint16 height2 = scale2*frame2->getHeight();
-
+//std::cout << "player: "<<width1 << ", "<<height1 <<"obj: "<<width2<<", "<<height2<< std::endl;
   int o1Left = p1[0]; 
   int o1Right = o1Left+width1;
 
