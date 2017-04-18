@@ -17,7 +17,9 @@ Hud::Hud(const std::string& name) :
   width(Gamedata::getInstance().getXmlInt(name+"/width")),
   height(Gamedata::getInstance().getXmlInt(name+"/height")),
   hudRect({(int)getX(),(int)getY(),width,height}),
-  renderer(rc->getRenderer())
+  renderer(rc->getRenderer()),
+  playerHealth(100),
+  playerLives(10)
 { }
 
 Hud::Hud(const Hud& s) :
@@ -28,7 +30,9 @@ Hud::Hud(const Hud& s) :
 	width( s.width ),
 	height( s.height ),
 	hudRect({(int)getX(),(int)getY(),width,height}),
-    renderer(rc->getRenderer())
+    renderer(rc->getRenderer()),
+    playerHealth(100),
+    playerLives(10)
   { }
 
 void Hud::draw() const { 
@@ -42,19 +46,25 @@ void Hud::draw() const {
 
   	std::stringstream strm;
     std::stringstream strm2;
-    std::stringstream strm3;
+    std::stringstream strm3;    
+    std::stringstream strm4;
+    std::stringstream strm5;
     strm << "FPS: " << clock.getFps();
 
     strm2 << "Avg FPS: "<<clock.getAvgFps();
               // std::cout << strm2.str()<<std::endl;
 
     strm3 << "Seconds: "<<clock.getSeconds();
-          // std::cout << strm3.str()<<std::endl;
 
+    strm4 << "Lives: "<<getLives();
+
+    strm5 << "Health: "<<getHealth();
  	io.writeText(strm.str(), hudRect.x+5, hudRect.y+65,{255, 0, 0, 255 });
   io.writeText(strm2.str(), hudRect.x+5, hudRect.y+95,{255, 0, 0, 255 });
   io.writeText("W,A,S,D to move", hudRect.x+5, hudRect.y+5,{255, 0, 0, 255 });
   io.writeText(strm3.str(), hudRect.x+5, hudRect.y+125,{255, 0, 0, 255 });
+  io.writeText(strm4.str(), hudRect.x+5, hudRect.y+155,{255, 0, 0, 255 });
+  io.writeText(strm5.str(), hudRect.x+5, hudRect.y+185,{255, 0, 0, 255 });
 
   	//io.writeText("Chase Conklin", 350, 40,{0xff, 0, 0, 0});
   	io.writeText(Gamedata::getInstance().getXmlStr("username"), hudRect.x+5,hudRect.y+35,{255, 0, 0, 255 });

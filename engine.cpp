@@ -57,6 +57,7 @@ Engine::Engine(string choice) :
   spritesBack(),
   spritesMiddle(),
   spritesFront(),
+  spritesExplosion(),
   currentSprite(-1),
   //makeVideo( false ),
   //player(new Player(choice,1.0,1.0,100,500)),
@@ -65,9 +66,10 @@ Engine::Engine(string choice) :
   showHud(true),
   hudTicks(0),
   playerType(choice),
-  strategy( new PerPixelCollisionStrategy )
+  strategy( new PerPixelCollisionStrategy ),
+  waitTimer(0),
+  ignore()
 {
-
   string villian="angler";
   string npc1 = "tuna";
   string npc2 = "fish";
@@ -137,39 +139,41 @@ for ( unsigned int i = 0; i < numF; ++i ) {
 
 
 std::vector<Drawable*>::iterator ptr = spritesBack.begin();
-  ++ptr;
+ // ++ptr;
   sort(ptr, spritesBack.end(), SpriteLess());
-  for ( Drawable* sprite : sprites ) {
-    Sprite* thisone = dynamic_cast<Sprite*>(sprite);
-    if ( thisone ) {
-      std::cout << thisone->getsScale() << std::endl;
-    }
-  }
+  // for ( Drawable* sprite : sprites ) {
+  //   Sprite* thisone = dynamic_cast<Sprite*>(sprite);
+  //   if ( thisone ) {
+  //     std::cout << thisone->getsScale() << std::endl;
+  //   }
+  // }
   ptr = spritesMiddle.begin();
-  ++ptr;
+ // ++ptr;
   sort(ptr, spritesMiddle.end(), SpriteLess());
-  for ( Drawable* sprite : sprites ) {
-    Sprite* thisone = dynamic_cast<Sprite*>(sprite);
-    if ( thisone ) {
-      std::cout << thisone->getsScale() << std::endl;
-    }
-  }
+  // for ( Drawable* sprite : sprites ) {
+  //   Sprite* thisone = dynamic_cast<Sprite*>(sprite);
+  //   if ( thisone ) {
+  //     std::cout << thisone->getsScale() << std::endl;
+  //   }
+  // }
 
   ptr = spritesFront.begin();
-  ++ptr;
+ // ++ptr;
   sort(ptr, spritesFront.end(), SpriteLess());
-  for ( Drawable* sprite : sprites ) {
-    Sprite* thisone = dynamic_cast<Sprite*>(sprite);
-    if ( thisone ) {
-      std::cout << thisone->getsScale() << std::endl;
-    }
-  }
+  // for ( Drawable* sprite : sprites ) {
+  //   Sprite* thisone = dynamic_cast<Sprite*>(sprite);
+  //   if ( thisone ) {
+  //     std::cout << thisone->getsScale() << std::endl;
+  //   }
+  // }
   sprites.push_back(player);
 
   //sprites.push_back(new Sprite("mine"));
 
   //sprites.push_back( new TurningMultiSprite("diver"));
-  sprites.push_back( new RunningTurningMultiSprite("malloy"));
+  
+  //depreceated
+  //sprites.push_back( new RunningTurningMultiSprite("malloy"));
 
 
 
@@ -224,20 +228,39 @@ void Engine::checkForCollisions() {
   Drawable* player = sprites[0];
 // ++it;
   int counter=0;
-  static int ignore[100]={};
+ // static int ignore[100]={};
   while ( it != spritesFront.end() ) {
     if ( strategy->execute(*player, **it) ) {
 
 //*it
-      if(!ignore[counter]){
-      ignore[counter]=1;
-    const Sprite s(spritesFront[counter],spritesFront[counter]);
+      if(!ignore[counter] && (hud->getHealth()>0) ){
 
-    Drawable* boom = new ExplodingSprite(s);
-    delete spritesFront[counter];
+        hud->setHealth(hud->getHealth()-10) ;
+        showHud=true;
+        ignore[counter]=1;
+        const Sprite s(spritesFront[counter],spritesFront[counter]);
 
-    spritesFront[counter] = boom;
-  }
+        Drawable* boom = new ExplodingSprite(s);
+        delete spritesFront[counter];
+
+        spritesFront[counter] = boom;
+
+        if(hud->getHealth()==0){
+          hud->setLives(hud->getLives()-1);
+          const Sprite s(sprites[0],sprites[0]);
+
+          Drawable* boom = new ExplodingSprite(s);
+          //delete sprites[0];
+
+          spritesExplosion.push_back(boom);
+          waitTimer=1;
+          // this->player->stopY();
+          // this->player->stopX();
+
+        }
+
+
+      }
     //std::cout<<boom->getsScale() << std::endl;
 
     //std::cout <<  spritesFront[counter]->getName()<<std::endl;
@@ -267,7 +290,22 @@ void Engine::draw() const {
   io.writeText(Gamedata::getInstance().getXmlStr("name"), 0, Gamedata::getInstance().getXmlInt("view/height")-30,{255, 255, 0, 255 });
 
   io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), 15,0);
+
+
+if(hud->getHealth()>0){
   for(auto* s : sprites) s->draw();
+}
+// else{
+//   auto* s = sprites.begin();
+//   s++;
+//   while(s != sprites.end()){
+    
+//       *s->draw();
+//       *s++;
+//   }
+  for(auto* s : spritesExplosion) s->draw();
+
+
 
   if(showHud){
     hud->draw();
@@ -280,6 +318,7 @@ void Engine::draw() const {
 
 void Engine::update(Uint32 ticks) {
   for(auto* s : sprites) s->update(ticks);
+  for(auto* s : spritesExplosion) s->update(ticks);
   for(auto* s : spritesBack) s->update(ticks);
   for(auto* s : spritesMiddle) s->update(ticks);
   for(auto* s : spritesFront) s->update(ticks);
@@ -368,7 +407,13 @@ int Engine::play() {
     ticks = clock.getElapsedTicks();
     if ( ticks > 0 ) {
 
-
+        if(waitTimer >0){
+          waitTimer++;
+          if(waitTimer == 200){
+            waitTimer = 0;
+            hud->setHealth(100);
+          }
+        }
 
         if(showHud){
           hudTicks++;
@@ -386,6 +431,7 @@ int Engine::play() {
         if (keystate[SDL_SCANCODE_LSHIFT] || keystate[SDL_SCANCODE_RSHIFT]) {
           //PLAYER SPEED DOUBLE
         }
+if(hud->getHealth()>0){
 
         if( (keystate[SDL_SCANCODE_W] && keystate[SDL_SCANCODE_S]) || (!keystate[SDL_SCANCODE_W] && !keystate[SDL_SCANCODE_S])){
           player->stopY();
@@ -406,7 +452,7 @@ int Engine::play() {
         }else if(keystate[SDL_SCANCODE_D]){
           player->right();
         }
-
+}
       clock.incrFrame();
       draw();
       update(ticks);

@@ -33,7 +33,6 @@ public:
   void speedDown();
 
 protected:
-
   bool xPressed;
   bool yPressed;
   Vector2f initVelocity;

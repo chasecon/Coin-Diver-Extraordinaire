@@ -23,6 +23,10 @@ public:
   virtual void update(Uint32 ticks);
   const Frame* getFrame() const{return NULL;};
 
+  int getLives() const{return playerLives;}
+  int getHealth() const{return playerHealth;}
+  void setLives(int lives) { playerLives=lives;}
+  void setHealth(int health) { playerHealth=health;}
 
 protected:
 Clock& clock;
@@ -35,7 +39,8 @@ int width;
 int height;
 SDL_Rect hudRect;
 SDL_Renderer * const renderer;
-
+int playerHealth;
+int playerLives;
 
 };
 #endif

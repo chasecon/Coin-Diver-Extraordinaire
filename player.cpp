@@ -141,7 +141,7 @@ setY(getY()+1.0);
   }*/
     if ( getY() > worldHeight-170) {
         setY(getY() - incr[1]);
-setY(getY()-1.0);
+      setY(getY()-1.0);
 
     //stopY();
     //setVelocityY( -fabs( getVelocityY() ) );

@@ -11,7 +11,7 @@
 <period>17</period>
 <numBack>20</numBack>
 <numMiddle>20</numMiddle>
-<numFront>20</numFront>
+<numFront>5</numFront>
 
 <maxFrames>500</maxFrames>
 <username>caconkl</username>
@@ -368,7 +368,7 @@
 <hud>
   <startLoc x="15" y="60"/>
   <width>200</width>
-  <height>170</height>
+  <height>230</height>
   <transparency>true</transparency>
 </hud>
 

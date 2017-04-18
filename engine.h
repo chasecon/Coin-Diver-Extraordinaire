@@ -22,6 +22,7 @@
 #include "menu.h"
 #include "explodingSprite.h"
 #include "collisionStrategy.h"
+#include <map>
 
 class Engine {
 public:
@@ -46,6 +47,7 @@ private:
   std::vector<Drawable*> spritesBack;
   std::vector<Drawable*> spritesMiddle;
   std::vector<Drawable*> spritesFront;
+  std::vector<Drawable*> spritesExplosion;
 
   int currentSprite;
   //bool makeVideo;
@@ -58,6 +60,8 @@ private:
   int hudTicks;
   string playerType;
     CollisionStrategy* strategy;
+    int waitTimer;
+    std::map<int,int> ignore;
 
   Engine(const Engine&)=delete;
   Engine& operator=(const Engine&)=delete;
