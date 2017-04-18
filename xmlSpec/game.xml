@@ -228,6 +228,25 @@
   <frames>3</frames>
 </malloyLeft>
 
+<malloyTop>
+  <file>images/malloy.png</file>
+  <startLoc x="160" y="800"/>
+  <frames>3</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>-200</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
+</malloyTop>
+
+<malloyTopLeft>
+  <file>images/malloyLeft.png</file>
+  <frames>3</frames>
+</malloyTopLeft>
+
 <bigJelly>
   <file>images/bigJelly.png</file>
   <startLoc x="600" y="600"/>

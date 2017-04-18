@@ -19,7 +19,11 @@ Hud::Hud(const std::string& name) :
   hudRect({(int)getX(),(int)getY(),width,height}),
   renderer(rc->getRenderer()),
   playerHealth(100),
-  playerLives(10)
+  playerLives(10),
+  playerX(0.0),
+  playerY(0.0),
+  playerH(0),
+  playerW(0)
 { }
 
 Hud::Hud(const Hud& s) :

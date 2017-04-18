@@ -27,7 +27,14 @@ public:
   int getHealth() const{return playerHealth;}
   void setLives(int lives) { playerLives=lives;}
   void setHealth(int health) { playerHealth=health;}
-
+  float getPlayerX(){return playerX;}
+  float getPlayerY(){return playerY;}
+  int getPlayerH(){return playerH;}
+  int getPlayerW(){return playerW;}
+  void setPlayerX(float x){playerX=x;}
+  void setPlayerY(float y){playerY=y;}
+  void setPlayerH(int h){playerH=h;}
+  void setPlayerW(int w){playerW=w;}
 protected:
 Clock& clock;
 
@@ -41,6 +48,10 @@ SDL_Rect hudRect;
 SDL_Renderer * const renderer;
 int playerHealth;
 int playerLives;
+float playerX;
+float playerY;
+int playerH;
+int playerW;
 
 };
 #endif

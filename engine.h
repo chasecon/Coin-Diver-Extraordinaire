@@ -23,7 +23,7 @@
 #include "explodingSprite.h"
 #include "collisionStrategy.h"
 #include <map>
-
+#include "smartSprite.h"
 class Engine {
 public:
   Engine (string choice);

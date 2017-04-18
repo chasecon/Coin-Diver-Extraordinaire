@@ -206,7 +206,6 @@ std::vector<Drawable*>::iterator ptr = spritesBack.begin();
   spritesFront.push_back( new TurningMultiSprite("missle"));
   spritesFront.push_back( new TurningMultiSprite("missle"));
   spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.2));
   spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
   spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
   spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
@@ -216,6 +215,9 @@ std::vector<Drawable*>::iterator ptr = spritesBack.begin();
   spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
   spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
   spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  spritesFront.push_back( new SmartSprite("jelly",0.3,2.0,hud));
+  spritesFront.push_back( new SmartSprite("malloyTop",0.3,1.0,hud));
 
 
 
@@ -295,14 +297,7 @@ void Engine::draw() const {
 if(hud->getHealth()>0){
   for(auto* s : sprites) s->draw();
 }
-// else{
-//   auto* s = sprites.begin();
-//   s++;
-//   while(s != sprites.end()){
-    
-//       *s->draw();
-//       *s++;
-//   }
+
   for(auto* s : spritesExplosion) s->draw();
 
 
@@ -318,6 +313,11 @@ if(hud->getHealth()>0){
 
 void Engine::update(Uint32 ticks) {
   for(auto* s : sprites) s->update(ticks);
+    hud->setPlayerX(sprites[0]->getX());
+    hud->setPlayerY(sprites[0]->getY());
+    hud->setPlayerH(sprites[0]->getFrame()->getHeight());
+    hud->setPlayerW(sprites[0]->getFrame()->getWidth());
+
   for(auto* s : spritesExplosion) s->update(ticks);
   for(auto* s : spritesBack) s->update(ticks);
   for(auto* s : spritesMiddle) s->update(ticks);
@@ -382,6 +382,9 @@ int Engine::play() {
                   
           if ( keystate[SDL_SCANCODE_R] ) {
             return 1;
+          }
+          if ( keystate[SDL_SCANCODE_G] ) {
+              hud->setHealth(99999);
           }
           
           if ( keystate[SDL_SCANCODE_T] ) 

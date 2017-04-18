@@ -25,6 +25,7 @@ OBJS = \
 	chunk.o \
 	explodingSprite.o \
 	collisionStrategy.o \
+	smartSprite.o \
 	menu.o \
 	hud.o \
 	player.o \
