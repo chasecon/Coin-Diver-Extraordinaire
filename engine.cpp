@@ -13,7 +13,6 @@ public:
   }
 };
 
-
 Engine::~Engine() { 
 
   std::cout << "Terminating program" << std::endl;
@@ -65,7 +64,8 @@ Engine::Engine(string choice) :
   hud(new Hud("hud")),
   showHud(true),
   hudTicks(0),
-  playerType(choice)
+  playerType(choice),
+  strategy( new PerPixelCollisionStrategy )
 {
 
   string villian="angler";
@@ -97,7 +97,6 @@ if(choice == "spongebob"){
   unsigned int numB = Gamedata::getInstance().getXmlInt("numBack");
   unsigned int numM = Gamedata::getInstance().getXmlInt("numMiddle");
   unsigned int numF = Gamedata::getInstance().getXmlInt("numFront");
-
 for ( unsigned int i = 0; i < numB; ++i ) {
     auto* s = new TurningMultiSprite("seagull");
     float scale = dist(mt);
@@ -132,8 +131,10 @@ for ( unsigned int i = 0; i < numF; ++i ) {
     float scale = dist(mt);
     while(scale < 0.66f) scale = dist(mt);
     s->setScale(scale);
+    if(i==0)s->setsScale(7.0);
     spritesFront.push_back(s);
   }
+
 
 std::vector<Drawable*>::iterator ptr = spritesBack.begin();
   ++ptr;
@@ -163,12 +164,12 @@ std::vector<Drawable*>::iterator ptr = spritesBack.begin();
       std::cout << thisone->getsScale() << std::endl;
     }
   }
-
   sprites.push_back(player);
+
+  //sprites.push_back(new Sprite("mine"));
+
   //sprites.push_back( new TurningMultiSprite("diver"));
   sprites.push_back( new RunningTurningMultiSprite("malloy"));
-
-
 
 
 
@@ -189,45 +190,62 @@ std::vector<Drawable*>::iterator ptr = spritesBack.begin();
   spritesFront.push_back( new StayingMultiSprite("coin",1560,900));
 
   spritesFront.push_back( new TurningMultiSprite(villian,1.0,3.0));
-  //spritesFront.push_back( new TurningMultiSprite("angler",1.0,3.0));
   spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));  
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));  
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-
-  // spritesMiddle.push_back(new TurningMultiSprite("jelly",0.5, 2.0));
-  // spritesMiddle.push_back(new TurningMultiSprite("jelly",0.5, 2.0));
-  // spritesMiddle.push_back(new TurningMultiSprite("jelly",0.5, 2.0));
-  // spritesMiddle.push_back(new TurningMultiSprite("jelly",0.5, 2.0));
-  // spritesMiddle.push_back(new TurningMultiSprite("jelly",0.5, 2.0));
-  // spritesMiddle.push_back(new TurningMultiSprite("jelly",0.5, 2.0));
-  // spritesMiddle.push_back(new TurningMultiSprite("jelly",0.5, 2.0));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));  
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));  
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.2));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
 
 
-
- // std::cout << Gamedata::getInstance().getXmlInt("malloy/startLoc/x") << std::endl;
-  //std::cout << Gamedata::getInstance().getXmlInt("malloyLeft/startLoc/x") << std::endl;
 
   switchSprite();
   std::cout << "Loading complete" << std::endl;
+}
+
+void Engine::checkForCollisions() {
+  std::vector<Drawable*>::const_iterator it = spritesFront.begin();
+  Drawable* player = sprites[0];
+// ++it;
+  int counter=0;
+  static int ignore[100]={};
+  while ( it != spritesFront.end() ) {
+    if ( strategy->execute(*player, **it) ) {
+
+//*it
+      if(!ignore[counter]){
+      ignore[counter]=1;
+    const Sprite s(spritesFront[counter],spritesFront[counter]);
+
+    Drawable* boom = new ExplodingSprite(s);
+    delete spritesFront[counter];
+
+    spritesFront[counter] = boom;
+  }
+    //std::cout<<boom->getsScale() << std::endl;
+
+    //std::cout <<  spritesFront[counter]->getName()<<std::endl;
+
+    }
+    ++it;
+    counter++;
+  }
 }
 
 void Engine::draw() const {
@@ -286,7 +304,6 @@ int Engine::play() {
   const Uint8* keystate;
   bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
-
   while ( !done ) {
     while ( SDL_PollEvent(&event) ) {
       keystate = SDL_GetKeyboardState(NULL);
@@ -309,6 +326,20 @@ int Engine::play() {
             clock.toggleSloMo();
           }
           */
+
+          if ( keystate[SDL_SCANCODE_E] ) {
+
+             const Sprite s(spritesFront[20],spritesFront[20]);
+
+           Drawable* boom = new ExplodingSprite(s);
+           delete spritesFront[20];
+
+          spritesFront[20] = boom;
+
+
+
+          }
+          
                   
           if ( keystate[SDL_SCANCODE_R] ) {
             return 1;
@@ -379,6 +410,7 @@ int Engine::play() {
       clock.incrFrame();
       draw();
       update(ticks);
+      checkForCollisions();
       //if ( makeVideo ) {
       if(frameGen.getBool()){
         frameGen.makeFrame();

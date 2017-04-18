@@ -18,6 +18,67 @@ Sprite::Sprite(const std::string& name) :
   frameHeight(frame->getHeight())
 { }
 
+Sprite::Sprite(const std::string& name, const double vs, const double ss) :
+  Drawable(name,
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"), 
+                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")), 
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"), 
+                    Gamedata::getInstance().getXmlInt(name+"/speedY")),
+           vs,
+           ss 
+           ),
+  frame( RenderContext::getInstance()->getFrame(name) ),
+  worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+  frameWidth(frame->getWidth()),
+  frameHeight(frame->getHeight())
+{ }
+
+Sprite::Sprite(const std::string& name, const Frame* f,const double vs, const double ss) :
+  Drawable(name,
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"), 
+                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")), 
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"), 
+                    Gamedata::getInstance().getXmlInt(name+"/speedY")),
+           vs,
+           ss 
+           ),
+  frame( f ),
+  worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+  frameWidth(frame->getWidth()),
+  frameHeight(frame->getHeight())
+{ }
+
+Sprite::Sprite(const Drawable* d,const Drawable* dd) :
+  Drawable(d->getName(),
+           d->getPosition(), 
+           d->getVelocity(),
+           dd->getvScale(),
+           dd->getsScale() 
+           ),
+  frame( d->getFrame() ),
+  worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+  frameWidth(frame->getWidth()),
+  frameHeight(frame->getHeight())
+{ }
+
+Sprite::Sprite(const std::string& name, const Frame* f) :
+  Drawable(name,
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"), 
+                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")), 
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"), 
+                    Gamedata::getInstance().getXmlInt(name+"/speedY")),
+           1.0 
+           ),
+  frame( f ),
+  worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+  frameWidth(f->getWidth()),
+  frameHeight(f->getHeight())
+{ }
+
 Sprite::Sprite(const Sprite& s) :
   Drawable(s), 
   frame(s.frame),
@@ -38,7 +99,7 @@ Sprite& Sprite::operator=(const Sprite& rhs) {
 }
 
 void Sprite::draw() const { 
-  frame->draw(getX(), getY()); 
+  frame->draw(getX(), getY(),getsScale()); 
 }
 
 void Sprite::update(Uint32 ticks) { 

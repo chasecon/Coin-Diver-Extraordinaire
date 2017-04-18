@@ -9,9 +9,9 @@
 
 <frameCapOn>true</frameCapOn>
 <period>17</period>
-<numBack>20</numBack>
-<numMiddle>20</numMiddle>
-<numFront>20</numFront>
+<numBack>1</numBack>
+<numMiddle>1</numMiddle>
+<numFront>1</numFront>
 
 <maxFrames>500</maxFrames>
 <username>caconkl</username>
@@ -104,11 +104,19 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+  <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </diver>
 
 <diverLeft>
   <file>images/diver2Left.png</file>
   <frames>8</frames>
+  <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </diverLeft>
 
 <spongebob>
@@ -119,6 +127,10 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </spongebob>
 
 <spongebobLeft>
@@ -134,6 +146,10 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </coin>
 
 <fish>
@@ -144,6 +160,10 @@
   <speedX>-150</speedX>
   <speedY>150</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </fish>
 
 <fishLeft>
@@ -159,6 +179,10 @@
   <speedX>-150</speedX>
   <speedY>150</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </seagull>
 
 <seagullLeft>
@@ -174,6 +198,10 @@
   <speedX>-150</speedX>
   <speedY>150</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </tuna>
 
 <tunaLeft>
@@ -189,6 +217,10 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </malloy>
 
 <malloyLeft>
@@ -204,6 +236,10 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </bigJelly>
 
 <bigJellyLeft>
@@ -219,6 +255,10 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </yee>
 
 <yeeLeft>
@@ -234,11 +274,19 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+      <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </angler>
 
 <anglerLeft>
   <file>images/anglerLeft.png</file>
   <frames>6</frames>
+      <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </anglerLeft>
 
 <jelly>
@@ -249,6 +297,10 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </jelly>
 
 <jellyLeft>
@@ -264,6 +316,10 @@
   <speedX>-200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </flyDino>
 
 <flyDinoLeft>
@@ -279,6 +335,10 @@
   <speedX>-200</speedX>
   <speedY>0</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </missle>
 
 <missleLeft>
@@ -294,6 +354,10 @@
   <speedX>0</speedX>
   <speedY>100</speedY>
   <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
 </mine>
 
 <mineLeft>
@@ -308,4 +372,9 @@
   <transparency>true</transparency>
 </hud>
 
+
+
+
 </GameData>
+
+

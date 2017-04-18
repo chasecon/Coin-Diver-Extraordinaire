@@ -5,7 +5,6 @@
 #include <string>
 #include "vector2f.h"
 #include "frame.h"
- 
 // Drawable is an Abstract Base Class (ABC) that
 // specifies the methods that derived classes may
 // and must have.
@@ -48,6 +47,7 @@ public:
     inline float getvScale()const{ return vScale; }
   void  setvScale(float s){ vScale = s; }
     inline float getsScale()const{ return sScale; }
+    inline float getScale()const{ return sScale; }
   void  setsScale(float s){ sScale = s; }
   void  setScale(float s){ vScale = sScale = s; }
 

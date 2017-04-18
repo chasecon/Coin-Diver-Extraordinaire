@@ -20,6 +20,8 @@
 #include "stayingMultiSprite.h"
 #include "player.h"
 #include "menu.h"
+#include "explodingSprite.h"
+#include "collisionStrategy.h"
 
 class Engine {
 public:
@@ -55,7 +57,11 @@ private:
   bool showHud;
   int hudTicks;
   string playerType;
+    CollisionStrategy* strategy;
+
   Engine(const Engine&)=delete;
   Engine& operator=(const Engine&)=delete;
+    void checkForCollisions();
+
 };
 #endif

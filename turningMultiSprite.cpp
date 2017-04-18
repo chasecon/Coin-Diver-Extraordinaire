@@ -2,6 +2,8 @@
 #include "gamedata.h"
 #include "renderContext.h"
 
+
+
 Vector2f TurningMultiSprite::makeVelocity(int xv, int yx) const {
    // float dxv = Gamedata::getInstance().getRandInRange(xv-100,yx+100);
     //float dyv = Gamedata::getInstance().getRandInRange(xv-100,yx+100);

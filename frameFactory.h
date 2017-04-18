@@ -11,6 +11,8 @@ public:
   static FrameFactory* getInstance();
   ~FrameFactory();
 
+  SDL_Surface* getSurface(const std::string&);
+
   Frame* getFrame(const std::string&);
   std::vector<Frame*> getFrames(const std::string&);
 
@@ -18,6 +20,7 @@ public:
 private:
   static FrameFactory* instance;
   const Gamedata& gdata;
+  std::map<std::string, SDL_Surface*> surfaces;
   std::map<std::string, SDL_Texture*> textures;
   std::map<std::string, Frame*> frames;
 
@@ -26,6 +29,7 @@ private:
 
   FrameFactory() : 
     gdata( Gamedata::getInstance() ), 
+    surfaces(),
     textures(),
     frames(),
     multiTextures(),

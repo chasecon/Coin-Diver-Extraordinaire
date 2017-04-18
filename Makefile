@@ -22,6 +22,9 @@ OBJS = \
 	turningMultiSprite.o \
 	runningTurningMultiSprite.o \
 	stayingMultiSprite.o \
+	chunk.o \
+	explodingSprite.o \
+	collisionStrategy.o \
 	menu.o \
 	hud.o \
 	player.o \

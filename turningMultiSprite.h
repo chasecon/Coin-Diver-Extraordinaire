@@ -4,7 +4,7 @@
 #include <vector>
 #include <cmath>
 #include "drawable.h"
-
+#include "sprite.h"
 class TurningMultiSprite : public Drawable {
 public:
   TurningMultiSprite(const std::string&);
