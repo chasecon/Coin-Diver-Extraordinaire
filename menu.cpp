@@ -33,19 +33,19 @@ Menu::Menu() :
 
 MenuSprite* player = new MenuSprite("diver",1.0,1.0,0,300);
 MenuSprite* villain = new MenuSprite("malloy",1.0,1.0,300,300);
-MenuSprite* thing = new MenuSprite("fish",1.0,1.0,300,300);
+MenuSprite* thing = new MenuSprite("book",1.0,0.15,300,300);
 player->setVelocityX(200);
 villain->setVelocityX(200);
 thing->setVelocityX(200);
 MenuSprite* player2 = new MenuSprite("spongebob",1.0,3.0,0,300);
 MenuSprite* villain2 = new MenuSprite("bigJelly",1.0,2.5,300,300);
-MenuSprite* thing2 = new MenuSprite("fish",1.0,1.0,300,300);
+MenuSprite* thing2 = new MenuSprite("book",1.0,0.1,300,300);
 player2->setVelocityX(200);
 villain2->setVelocityX(200);
 thing2->setVelocityX(200);
 MenuSprite* player3 = new MenuSprite("yee",1.0,0.3,0,300);
 MenuSprite* villain3 = new MenuSprite("flyDino",1.0,1.2,300,300);
-MenuSprite* thing3 = new MenuSprite("fish",1.0,1.0,300,300);
+MenuSprite* thing3 = new MenuSprite("book",1.0,0.1,300,300);
 player3->setVelocityX(200);
 villain3->setVelocityX(200);
 thing3->setVelocityX(200);
@@ -83,12 +83,12 @@ Viewport::getInstance().setY(0);
   io.writeText(strm.str(), 25, HEIGHT-50,{255, 0, 0, 255 });
 
   io.writeText("W,A,S,D to choose settings", 5, 5,{255, 0, 0, 255 });
-  io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), (WIDTH/2)-150,(HEIGHT/2)-50,{255, 0, 0, 255 });
- 	io.writeText("---------------------------", (WIDTH/2)-150,(HEIGHT/2)-15,{255, 0, 0, 255 });
-  io.writeText("Malloy Diver", (WIDTH/2)-150,(HEIGHT/2)+15,{255, 0, 0, 255 });
-  io.writeText("Spongebob Diver", (WIDTH/2)-150,(HEIGHT/2)+45,{255, 0, 0, 255 });
-  io.writeText("DinosaurVille (YeeVille)", (WIDTH/2)-150,(HEIGHT/2)+75,{255, 0, 0, 255 });
-  io.writeText("*", (WIDTH/2)-160,(HEIGHT/2)+20+choice,{255, 0, 0, 255 });
+  io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), (WIDTH/2)-150,(HEIGHT/4)-50,{255, 0, 0, 255 });
+ 	io.writeText("---------------------------", (WIDTH/2)-150,(HEIGHT/4)-15,{255, 0, 0, 255 });
+  io.writeText("Malloy Diver", (WIDTH/2)-150,(HEIGHT/4)+15,{255, 0, 0, 255 });
+  io.writeText("Spongebob Diver", (WIDTH/2)-150,(HEIGHT/4)+45,{255, 0, 0, 255 });
+  io.writeText("DinosaurVille (YeeVille)", (WIDTH/2)-150,(HEIGHT/4)+75,{255, 0, 0, 255 });
+  io.writeText("*", (WIDTH/2)-160,(HEIGHT/4)+20+choice,{255, 0, 0, 255 });
 
   io.writeText("Chase Conklin", 25, HEIGHT-25,{0xff, 0, 0, 0});
   //for(auto* s : sprites) s->draw();

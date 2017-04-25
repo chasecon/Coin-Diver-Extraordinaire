@@ -40,7 +40,7 @@ MenuSprite::MenuSprite(const TurningMultiSprite& s) :
 
 void MenuSprite::draw() const { 
   // frames[currentFrame]->draw(getX(), getY(),getsScale());
-                std::cout << getName() << " y is: "<<getY()<<std::endl;
+               // std::cout << getName() << " y is: "<<getY()<<std::endl;
 
   frames[currentFrame]->draw(getX(), getY() ,getsScale());
 }
@@ -64,8 +64,8 @@ void MenuSprite::update(Uint32 ticks) {
     if ( getX() < 0) {
       setVelocityX( fabs( getVelocityX() ) );
     }
-    if ( getX() > Gamedata::getInstance().getXmlInt("view/width")-(getFrame()->getWidth())) {
-      setX(-(getFrame()->getWidth()) );
+    if ( getX() > Gamedata::getInstance().getXmlInt("view/width")-(getsScale()*(getFrame()->getWidth()))) {
+      setX(-(getsScale()*(getFrame()->getWidth())) );
     }  
 
   if(getVelocityX() < 0){

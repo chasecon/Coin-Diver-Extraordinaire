@@ -327,6 +327,25 @@
   <frames>6</frames>
 </jellyLeft>
 
+<book>
+  <file>images/cppBook.png</file>
+  <startLoc x="200" y="200"/>
+  <frames>1</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>300</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
+</book>
+
+<bookLeft>
+  <file>images/cppBook.png</file>
+  <frames>1</frames>
+</bookLeft>
+
 <flyDino>
   <file>images/flyDino.png</file>
   <startLoc x="200" y="200"/>
