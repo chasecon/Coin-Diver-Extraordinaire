@@ -103,6 +103,7 @@
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
   <speedY>200</speedY>
+  <bullet>raybeam</bullet>
   <transparency>true</transparency>
   <chunk>
   <size>9</size>
@@ -126,6 +127,7 @@
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
   <speedY>200</speedY>
+  <bullet>raybeam</bullet>
   <transparency>true</transparency>
     <chunk>
   <size>9</size>
@@ -272,6 +274,7 @@
   <frames>6</frames>
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
+  <bullet>raybeam</bullet>
   <speedY>200</speedY>
   <transparency>true</transparency>
     <chunk>
@@ -410,6 +413,15 @@
   <transparency>true</transparency>
 </hud>
 
+<raybeam>
+  <file>images/raybeam.png</file>
+  <interval>300</interval>
+  <distance>320</distance>
+  <startLoc x="100" y="100"/>
+  <speedX>200</speedX>
+  <speedY>0</speedY>
+  <strategy>rectangular</strategy>
+</raybeam>
 
 
 

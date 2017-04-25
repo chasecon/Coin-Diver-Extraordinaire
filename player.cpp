@@ -16,37 +16,55 @@ Player::Player( const std::string& name) :
 TurningMultiSprite(name),
   xPressed(false),
   yPressed(false),
-  initVelocity(getVelocity()) {}
+  initVelocity(getVelocity()),
+  bulletName( Gamedata::getInstance().getXmlStr(name+"/bullet") ),
+  bullets( bulletName ),
+  minSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/speedX") ) {}
 
 Player::Player( const std::string& name, float vScale) :  
 TurningMultiSprite(name,vScale),
   xPressed(false),
   yPressed(false),
-  initVelocity(getVelocity()) {}
+  initVelocity(getVelocity()),
+  bulletName( Gamedata::getInstance().getXmlStr(name+"/bullet") ),
+  bullets( bulletName ),
+  minSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/speedX") ) {}
 
   Player::Player( const std::string& name, float vScale, float sScale) :  
 TurningMultiSprite(name,vScale,sScale),
   xPressed(false),
   yPressed(false),
-  initVelocity(getVelocity()) {}
+  initVelocity(getVelocity()),
+  bulletName( Gamedata::getInstance().getXmlStr(name+"/bullet") ),
+  bullets( bulletName ),
+  minSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/speedX") ) {}
 
   Player::Player( const std::string& name, int x, int y) :  
 TurningMultiSprite(name),
   xPressed(false),
   yPressed(false),
-  initVelocity(getVelocity()) {setPosition(Vector2f(x,y));}
+  initVelocity(getVelocity()),
+  bulletName( Gamedata::getInstance().getXmlStr(name+"/bullet") ),
+  bullets( bulletName ),
+  minSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/speedX") ){setPosition(Vector2f(x,y));}
 
   Player::Player( const std::string& name, float vScale, float sScale, int x, int y) :  
   TurningMultiSprite(name,vScale,sScale),
   xPressed(false),
   yPressed(false),
-  initVelocity(getVelocity()) {setPosition(Vector2f(x,y));}
+  initVelocity(getVelocity()),
+  bulletName( Gamedata::getInstance().getXmlStr(name+"/bullet") ),
+  bullets( bulletName ),
+  minSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/speedX") ) {setPosition(Vector2f(x,y));}
 
 Player::Player(const Player& s) : 
 TurningMultiSprite(s),
   xPressed(s.xPressed),
   yPressed(s.yPressed),
-  initVelocity(getVelocity()){}
+  initVelocity(getVelocity()),
+  bulletName( Gamedata::getInstance().getXmlStr(s.getName()+"/bullet") ),
+  bullets( bulletName ),
+  minSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/speedX") ) {}
 /*
 void RunningTurningMultiSprite::draw() const { 
   frames[currentFrame]->draw(getX(), getY());
@@ -54,6 +72,7 @@ void RunningTurningMultiSprite::draw() const {
 */
 void Player::draw() const { 
   frames[currentFrame]->draw(getX(), getY(),getsScale());
+  bullets.draw();
 }
 
 
@@ -112,11 +131,35 @@ void Player::speedDown(){
 
 }
 
+void Player::shoot() { 
+  float x; 
+  float y;
+  // I'm not adding minSpeed to y velocity:
+  Vector2f vNew;
+  if(getVelocityX() >= 0 && frames == framesRight){
+      x = getX()+getFrame()->getWidth();
+      y = getY()+getFrame()->getHeight()/2;
+      vNew = Vector2f(minSpeed+getVelocityX(), 0);
+    }
+    else{ 
+      vNew = Vector2f(getVelocityX() -minSpeed , 0);
+      x = getX()-15;
+      y = getY()+getFrame()->getHeight()/2;
+    }
+  bullets.shoot( Vector2f(x, y), vNew);
+}
+
+bool Player::collidedWith(const Drawable* obj) const {
+  return bullets.collidedWith( obj );
+}
+
 void Player::update(Uint32 ticks) { 
     if(  !((getVelocityX() == 0) && (  getVelocityY() == 0)) )  {
       advanceFrame(ticks);
 
     }
+    bullets.update(ticks);
+
 
 setY(getY()+1.0);
 

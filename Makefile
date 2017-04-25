@@ -26,6 +26,8 @@ OBJS = \
 	explodingSprite.o \
 	collisionStrategy.o \
 	smartSprite.o \
+	bullet.o \
+	bulletPool.o \
 	menuSprite.o \
 	menu.o \
 	hud.o \

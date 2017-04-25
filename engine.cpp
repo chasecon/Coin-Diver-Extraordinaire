@@ -97,6 +97,7 @@ if(choice == "spongebob"){
   unsigned int numB = Gamedata::getInstance().getXmlInt("numBack");
   unsigned int numM = Gamedata::getInstance().getXmlInt("numMiddle");
   unsigned int numF = Gamedata::getInstance().getXmlInt("numFront");
+
 for ( unsigned int i = 0; i < numB; ++i ) {
     auto* s = new TurningMultiSprite("seagull");
     float scale = dist(mt);
@@ -148,39 +149,17 @@ std::vector<Drawable*>::iterator ptr = spritesBack.begin();
   ptr = spritesMiddle.begin();
  // ++ptr;
   sort(ptr, spritesMiddle.end(), SpriteLess());
-  // for ( Drawable* sprite : sprites ) {
-  //   Sprite* thisone = dynamic_cast<Sprite*>(sprite);
-  //   if ( thisone ) {
-  //     std::cout << thisone->getsScale() << std::endl;
-  //   }
-  // }
+
 
   ptr = spritesFront.begin();
  // ++ptr;
   sort(ptr, spritesFront.end(), SpriteLess());
-  // for ( Drawable* sprite : sprites ) {
-  //   Sprite* thisone = dynamic_cast<Sprite*>(sprite);
-  //   if ( thisone ) {
-  //     std::cout << thisone->getsScale() << std::endl;
-  //   }
-  // }
+
   sprites.push_back(player);
 
-  //sprites.push_back(new Sprite("mine"));
-
-  //sprites.push_back( new TurningMultiSprite("diver"));
-  
-  //depreceated
-  //sprites.push_back( new RunningTurningMultiSprite("malloy"));
 
 
-//MenuSprite* ms = new MenuSprite("malloy");
-//ms->setsScale(3.0);
-//spritesMiddle.push_back(ms);
-  // sprites.push_back( new RunningTurningMultiSprite("tuna"));
-  // sprites.push_back( new RunningTurningMultiSprite("fish"));
-  // sprites.push_back( new TurningMultiSprite("tuna"));
-  // sprites.push_back( new TurningMultiSprite("fish"));
+
   spritesFront.push_back( new StayingMultiSprite("coin",170,900));
   spritesFront.push_back( new StayingMultiSprite("coin",190,900));
   spritesFront.push_back( new StayingMultiSprite("coin",210,900));
@@ -231,6 +210,17 @@ void Engine::checkForCollisions() {
   int counter=0;
  // static int ignore[100]={};
   while ( it != spritesFront.end() ) {
+    if(!ignore[counter] && dynamic_cast<Player*>(player)->collidedWith(*it)){
+        ignore[counter]=1;
+        const Sprite s(spritesFront[counter],spritesFront[counter]);
+
+        Drawable* boom = new ExplodingSprite(s);
+        delete spritesFront[counter];
+
+        spritesFront[counter] = boom;
+
+
+    }
     if ( strategy->execute(*player, **it) ) {
 
 //*it
@@ -385,6 +375,9 @@ int Engine::play() {
           }
           if ( keystate[SDL_SCANCODE_G] ) {
               hud->setHealth(99999);
+          }
+          if ( keystate[SDL_SCANCODE_SPACE] ) {
+              player->shoot();
           }
           
           if ( keystate[SDL_SCANCODE_T] ) 

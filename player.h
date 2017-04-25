@@ -4,6 +4,8 @@
 #include <vector>
 #include <cmath>
 #include "drawable.h"
+#include "bullet.h"
+#include "bulletPool.h"
 #include "turningMultiSprite.h"
 
 class Player : public TurningMultiSprite {
@@ -19,6 +21,7 @@ public:
     virtual void draw() const;
 
   virtual void update(Uint32 ticks);
+  virtual bool collidedWith(const Drawable*) const;
   /*virtual const Frame* getFrame() const { 
     return frames[currentFrame]; 
   }
@@ -31,11 +34,17 @@ public:
   void down();
   void speedUp();
   void speedDown();
+  void shoot();
 
 protected:
   bool xPressed;
   bool yPressed;
   Vector2f initVelocity;
+
+  std::string bulletName;
+  BulletPool bullets;
+  float minSpeed;
+  Player& operator=(const Player&);
 
   /*
   std::vector<Frame *> frames;
