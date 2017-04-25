@@ -66,7 +66,7 @@ spritesThing.push_back(thing3);
 
 
 void Menu::draw() { 
-
+Viewport::getInstance().setY(0);
     SDL_SetRenderDrawColor(renderer, 0x05,0xff,0xff, 0xff);
     SDL_RenderClear(renderer);
   //for(auto* s : sprites) s->draw();
