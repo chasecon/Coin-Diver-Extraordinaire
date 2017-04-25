@@ -11,10 +11,11 @@ int main(int, char*[]) {
       int restart=1;
 
       while(restart){
+
          string s = menu.play();
          Engine engine(s);
          restart = engine.play();
-
+         //menu.fix();
    }
 
 

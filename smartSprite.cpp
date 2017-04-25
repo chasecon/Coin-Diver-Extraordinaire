@@ -49,9 +49,15 @@ void SmartSprite::update(Uint32 ticks) {
   float ex= hud->getPlayerX()+hud->getPlayerW()/2;
   float ey= hud->getPlayerY()+hud->getPlayerH()/2;
   //float distanceToEnemy = ::distance( x, y, ex, ey );
+      if ( abs(x-ex)<10){
 
-      if ( x > ex ) goLeft();
-      if ( x < ex ) goRight();
+      }else {
+      if ( x > ex ) {
+        goLeft();
+      }else if ( x < ex ) {
+        goRight(); 
+      }     
+      }
       if ( y > ey ) goUp();
       if ( y < ey ) goDown();
     

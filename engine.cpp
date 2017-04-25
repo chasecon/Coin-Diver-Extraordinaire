@@ -19,9 +19,7 @@ Engine::~Engine() {
   //std::vector<Drawable*>::iterator it = sprites.begin();
   //while ( it != sprites.end() ) {
   for(auto it : sprites){
-   // std::cout << it << " , " << it->getName()<< " deleted" << std::endl;
     delete it;
-    //++it;
   }
   for(auto it : spritesBack){
    // std::cout << it << " , " << it->getName()<< " deleted" << std::endl;
@@ -176,8 +174,9 @@ std::vector<Drawable*>::iterator ptr = spritesBack.begin();
   //sprites.push_back( new RunningTurningMultiSprite("malloy"));
 
 
-
-
+//MenuSprite* ms = new MenuSprite("malloy");
+//ms->setsScale(3.0);
+//spritesMiddle.push_back(ms);
   // sprites.push_back( new RunningTurningMultiSprite("tuna"));
   // sprites.push_back( new RunningTurningMultiSprite("fish"));
   // sprites.push_back( new TurningMultiSprite("tuna"));
@@ -381,6 +380,7 @@ int Engine::play() {
           
                   
           if ( keystate[SDL_SCANCODE_R] ) {
+
             return 1;
           }
           if ( keystate[SDL_SCANCODE_G] ) {

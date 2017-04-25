@@ -15,7 +15,7 @@ public:
 	static Menu& getInstance();
 	~Menu();
 
-
+	void fix();
 	virtual void draw();
 	//virtual void update(Uint32 ticks);
 	virtual string play();
@@ -33,6 +33,11 @@ protected:
 	int HEIGHT;
 	int choice;
 	string chosenPlayer;
+	  std::vector<Drawable*> spritesGood;
+	  std::vector<Drawable*> spritesBad;
+	  std::vector<Drawable*> spritesThing;
+	  int chosenPlayerInt;
+
 
 };
 #endif

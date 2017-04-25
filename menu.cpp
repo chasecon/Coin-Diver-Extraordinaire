@@ -1,9 +1,14 @@
 #include "menu.h"
 
-
 Menu& Menu::getInstance(){
   static Menu menu;
   return menu;
+}
+
+void Menu::fix(){
+          for(auto* s : spritesGood) s->setY(500);
+        for(auto* s : spritesBad) s->setY(500);
+        for(auto* s : spritesThing) s->setY(500);
 }
 
 Menu::~Menu(){
@@ -19,13 +24,56 @@ Menu::Menu() :
   WIDTH( Gamedata::getInstance().getXmlInt("view/width") ),
   HEIGHT( Gamedata::getInstance().getXmlInt("view/height") ),
   choice(0),
-  chosenPlayer("diver")
-{ }
+  chosenPlayer("diver"),
+  spritesGood(),
+  spritesBad(),
+  spritesThing(),
+  chosenPlayerInt(0)
+{ 
+
+MenuSprite* player = new MenuSprite("diver",1.0,1.0,0,300);
+MenuSprite* villain = new MenuSprite("malloy",1.0,1.0,300,300);
+MenuSprite* thing = new MenuSprite("fish",1.0,1.0,300,300);
+player->setVelocityX(200);
+villain->setVelocityX(200);
+thing->setVelocityX(200);
+MenuSprite* player2 = new MenuSprite("spongebob",1.0,3.0,0,300);
+MenuSprite* villain2 = new MenuSprite("bigJelly",1.0,2.5,300,300);
+MenuSprite* thing2 = new MenuSprite("fish",1.0,1.0,300,300);
+player2->setVelocityX(200);
+villain2->setVelocityX(200);
+thing2->setVelocityX(200);
+MenuSprite* player3 = new MenuSprite("yee",1.0,0.3,0,300);
+MenuSprite* villain3 = new MenuSprite("flyDino",1.0,1.2,300,300);
+MenuSprite* thing3 = new MenuSprite("fish",1.0,1.0,300,300);
+player3->setVelocityX(200);
+villain3->setVelocityX(200);
+thing3->setVelocityX(200);
+
+
+spritesGood.push_back(player);
+spritesBad.push_back(villain);
+spritesThing.push_back(thing);
+
+spritesGood.push_back(player2);
+spritesBad.push_back(villain2);
+spritesThing.push_back(thing2);
+
+spritesGood.push_back(player3);
+spritesBad.push_back(villain3);
+spritesThing.push_back(thing3);
+}
 
 
 void Menu::draw() { 
+
     SDL_SetRenderDrawColor(renderer, 0x05,0xff,0xff, 0xff);
     SDL_RenderClear(renderer);
+  //for(auto* s : sprites) s->draw();
+
+  spritesGood[chosenPlayerInt]->draw();
+  spritesBad[chosenPlayerInt]->draw();
+  spritesThing[chosenPlayerInt]->draw();
 
 
   	std::stringstream strm;
@@ -43,6 +91,7 @@ void Menu::draw() {
   io.writeText("*", (WIDTH/2)-160,(HEIGHT/2)+20+choice,{255, 0, 0, 255 });
 
   io.writeText("Chase Conklin", 25, HEIGHT-25,{0xff, 0, 0, 0});
+  //for(auto* s : sprites) s->draw();
 
     SDL_RenderPresent(renderer);
 
@@ -53,28 +102,35 @@ void Menu::levelSwitch(int i){
 if(choice == 0){
   choice=30;
             chosenPlayer="spongebob";
+            chosenPlayerInt = (chosenPlayerInt+1)%3;
 
 }else if(choice==30){
             chosenPlayer="yee";
+            chosenPlayerInt = (chosenPlayerInt+1)%3;
 
 choice=60;
 }else if(choice==60){
 choice=0;
               chosenPlayer="diver";
+            chosenPlayerInt = (chosenPlayerInt+1)%3;
 
 }
 }else{
 if(choice == 0){
   choice=60;
             chosenPlayer="spongebob";
+                        chosenPlayerInt = 2;
+
 
 }else if(choice==30){
             chosenPlayer="yee";
+                        chosenPlayerInt = 0;
 
 choice=0;
 }else if(choice==60){
 choice=30;
               chosenPlayer="diver";
+                        chosenPlayerInt = 1;
 
 }
 }
@@ -144,6 +200,13 @@ string Menu::play(){
 
       clock.incrFrame();
       draw();
+
+        for(auto* s : spritesGood) s->update(ticks);
+        for(auto* s : spritesBad) s->update(ticks);
+        for(auto* s : spritesThing) s->update(ticks);
+        // for(auto* s : spritesGood) s->setY(300);
+        // for(auto* s : spritesBad) s->setY(300);
+        // for(auto* s : spritesThing) s->setY(300);
       //update(ticks);
       if ( frameGen.getBool()) {
         frameGen.makeFrame();
@@ -154,6 +217,7 @@ string Menu::play(){
           choice=0;
 string temp=chosenPlayer;
 chosenPlayer="diver";
+
 return temp;
 
 }

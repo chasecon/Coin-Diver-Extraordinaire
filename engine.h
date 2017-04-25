@@ -24,6 +24,7 @@
 #include "collisionStrategy.h"
 #include <map>
 #include "smartSprite.h"
+#include "menuSprite.h"
 class Engine {
 public:
   Engine (string choice);
