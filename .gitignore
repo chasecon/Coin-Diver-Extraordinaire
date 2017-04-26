@@ -3,4 +3,4 @@
 *.o
 run
 *~
-
+.DS_Store
