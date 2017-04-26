@@ -78,13 +78,13 @@ if(choice == "spongebob"){
   npc1="jelly";
   npc2="jelly";
 }else if(choice == "yee"){
-    player->setsScale(0.5);
+    player->setsScale(0.2);
     villian="flyDino";
     npc1="flyDino";
     npc2="flyDino";
 
 }else if(choice == "diver"){
-    player->setsScale(1.0);
+    player->setsScale(0.5);
 
 }
 

@@ -115,7 +115,7 @@ yPressed=true;
 if(getY() < worldHeight -frameHeight){
   setVelocityY(initVelocity[1]);
 }*/
-if(getY() < worldHeight -170){
+if(getY() < worldHeight -(getScale()*(getFrame()->getHeight()))){
   setVelocityY(initVelocity[1]);
 }
 }
@@ -137,14 +137,14 @@ void Player::shoot() {
   // I'm not adding minSpeed to y velocity:
   Vector2f vNew;
   if(getVelocityX() >= 0 && frames == framesRight){
-      x = getX()+getFrame()->getWidth();
-      y = getY()+getFrame()->getHeight()/2;
+      x = getX()+(getScale()*getFrame()->getWidth());
+      y = getY()+(getScale()*getFrame()->getHeight()/2);
       vNew = Vector2f(minSpeed+getVelocityX(), 0);
     }
     else{ 
       vNew = Vector2f(getVelocityX() -minSpeed , 0);
       x = getX()-15;
-      y = getY()+getFrame()->getHeight()/2;
+      y = getY()+(getScale()*getFrame()->getHeight()/2);
     }
   bullets.shoot( Vector2f(x, y), vNew);
 }
@@ -160,8 +160,8 @@ void Player::update(Uint32 ticks) {
     }
     bullets.update(ticks);
 
-
-setY(getY()+1.0);
+if(getVelocityY()==0)
+  setY(getY()+1.0);
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   //double incrY = getVelocityY() * static_cast<float>(ticks) * 0.001;
@@ -182,7 +182,7 @@ setY(getY()+1.0);
     //stopY();
     //setVelocityY( -fabs( getVelocityY() ) );
   }*/
-    if ( getY() > worldHeight-170) {
+    if ( getY() > worldHeight-(getScale()*(getFrame()->getHeight()))) {
         setY(getY() - incr[1]);
       setY(getY()-1.0);
 
