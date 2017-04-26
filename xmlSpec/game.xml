@@ -127,7 +127,7 @@
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
   <speedY>200</speedY>
-  <bullet>raybeam</bullet>
+  <bullet>krabbyPatty</bullet>
   <transparency>true</transparency>
     <chunk>
   <size>9</size>
@@ -422,6 +422,16 @@
   <speedY>0</speedY>
   <strategy>rectangular</strategy>
 </raybeam>
+
+<krabbyPatty>
+  <file>images/krabbyPatty.png</file>
+  <interval>300</interval>
+  <distance>320</distance>
+  <startLoc x="100" y="100"/>
+  <speedX>200</speedX>
+  <speedY>0</speedY>
+  <strategy>rectangular</strategy>
+</krabbyPatty>
 
 
 
