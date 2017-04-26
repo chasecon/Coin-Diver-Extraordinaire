@@ -1,9 +1,9 @@
 #include "menu.h"
 
-Menu& Menu::getInstance(){
-  static Menu menu;
-  return menu;
-}
+// Menu& Menu::getInstance(){
+//   static Menu menu;
+//   return menu;
+// }
 
 void Menu::fix(){
           for(auto* s : spritesGood) s->setY(500);
@@ -66,9 +66,10 @@ spritesThing.push_back(thing3);
 
 
 void Menu::draw() { 
-Viewport::getInstance().setY(0);
-    SDL_SetRenderDrawColor(renderer, 0x05,0xff,0xff, 0xff);
-    SDL_RenderClear(renderer);
+  Viewport::getInstance().setY(0);
+  Viewport::getInstance().setX(0);
+  SDL_SetRenderDrawColor(renderer, 0x05,0xff,0xff, 0xff);
+  SDL_RenderClear(renderer);
   //for(auto* s : sprites) s->draw();
 
   spritesGood[chosenPlayerInt]->draw();
@@ -118,18 +119,18 @@ choice=0;
 }else{
 if(choice == 0){
   choice=60;
-            chosenPlayer="spongebob";
+            chosenPlayer="yee";
                         chosenPlayerInt = 2;
 
 
 }else if(choice==30){
-            chosenPlayer="yee";
+            chosenPlayer="diver";
                         chosenPlayerInt = 0;
 
 choice=0;
 }else if(choice==60){
 choice=30;
-              chosenPlayer="diver";
+              chosenPlayer="spongebob";
                         chosenPlayerInt = 1;
 
 }
@@ -145,7 +146,9 @@ string Menu::play(){
   const Uint8* keystate;
   bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
-
+spritesGood[0]->setX(0);
+spritesBad[0]->setX(300);
+spritesThing[0]->setX(300);
   while ( !done ) {
     while ( SDL_PollEvent(&event) ) {
       keystate = SDL_GetKeyboardState(NULL);

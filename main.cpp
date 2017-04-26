@@ -7,11 +7,11 @@ RenderContext* RenderContext::instance = NULL;
 int main(int, char*[]) {
    try {
 
-      Menu& menu = Menu::getInstance();
+      // Menu& menu = Menu::getInstance();
       int restart=1;
 
       while(restart){
-
+         Menu menu;
          string s = menu.play();
          Engine engine(s);
          restart = engine.play();

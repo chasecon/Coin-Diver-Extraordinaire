@@ -4,7 +4,7 @@
      So make sure to include your name as part of the screenTitle -->
 <screenTitle>Malloy: Coin Diver Extraordinaire</screenTitle>
 <title>Malloy: Coin Diver Extraordinaire</title>
-<name>Chase Conklin</name>
+<name>Chase Conklin and Stephen Linnell</name>
 <maxStringSize>50</maxStringSize>
 
 <frameCapOn>true</frameCapOn>
@@ -13,7 +13,7 @@
 <numMiddle>20</numMiddle>
 <numFront>5</numFront>
 
-<maxFrames>500</maxFrames>
+<maxFrames>1800</maxFrames>
 <username>caconkl</username>
 
 <view>

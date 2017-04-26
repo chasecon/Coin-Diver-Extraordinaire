@@ -12,8 +12,9 @@
 
 class Menu {
 public:
-	static Menu& getInstance();
+	// static Menu& getInstance();
 	~Menu();
+	Menu();
 
 	void fix();
 	virtual void draw();
@@ -21,7 +22,6 @@ public:
 	virtual string play();
 	void levelSwitch(int i);
 protected:
-	Menu();
 	Clock& clock;
 	FrameGenerator& frameGen;
 	const IOmod& io;

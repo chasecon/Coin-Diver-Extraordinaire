@@ -1,7 +1,7 @@
 #include "menuSprite.h"
 #include "gamedata.h"
 #include "renderContext.h"
-
+#include "viewport.h"
 
 MenuSprite::MenuSprite( const std::string& name) :
   TurningMultiSprite(name)
@@ -40,7 +40,8 @@ MenuSprite::MenuSprite(const TurningMultiSprite& s) :
 
 void MenuSprite::draw() const { 
   // frames[currentFrame]->draw(getX(), getY(),getsScale());
-               // std::cout << getName() << " y is: "<<getY()<<std::endl;
+                std::cout << getName() << " y is: "<<getY()<<std::endl;
+                std::cout << " view is: "<<   Viewport::getInstance().getX()<<", "<< Viewport::getInstance().getY()<<std::endl;
 
   frames[currentFrame]->draw(getX(), getY() ,getsScale());
 }
@@ -54,15 +55,15 @@ void MenuSprite::update(Uint32 ticks) {
   setPosition(getPosition() + incr);
 
 
-    // if ( getY() < 0) {
-    //   setVelocityY( fabs( getVelocityY() ) );
-    // }
-    // if ( getY() > worldHeight-frameHeight) {
-    //   setVelocityY( -fabs( getVelocityY() ) );
-    // }
+    if ( getY() < 0) {
+      setY( 300 );
+    }
+    if ( getY() > worldHeight-frameHeight) {
+      setY( 300 );
+    }
 
     if ( getX() < 0) {
-      setVelocityX( fabs( getVelocityX() ) );
+      setX(0);
     }
     if ( getX() > Gamedata::getInstance().getXmlInt("view/width")-(getsScale()*(getFrame()->getWidth()))) {
       setX(-(getsScale()*(getFrame()->getWidth())) );
