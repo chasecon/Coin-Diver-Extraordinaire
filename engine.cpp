@@ -328,6 +328,10 @@ void Engine::switchSprite(){
 int Engine::play() {
   //clock.startClock();
   //clock.unpause();
+
+  SDLSound sound("sound/oblivionIntro.wav");
+  //sound[2];
+sound.startMusic();
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;

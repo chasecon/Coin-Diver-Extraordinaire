@@ -149,6 +149,11 @@ string Menu::play(){
 spritesGood[0]->setX(0);
 spritesBad[0]->setX(300);
 spritesThing[0]->setX(300);
+
+  SDLSound sound("sound/pokemonIntro.wav");
+
+sound.startMusic();
+
   while ( !done ) {
     while ( SDL_PollEvent(&event) ) {
       keystate = SDL_GetKeyboardState(NULL);

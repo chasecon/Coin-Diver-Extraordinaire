@@ -25,6 +25,7 @@
 #include <map>
 #include "smartSprite.h"
 #include "menuSprite.h"
+#include "sound.h"
 class Engine {
 public:
   Engine (string choice);

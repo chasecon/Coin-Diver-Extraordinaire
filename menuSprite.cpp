@@ -40,8 +40,8 @@ MenuSprite::MenuSprite(const TurningMultiSprite& s) :
 
 void MenuSprite::draw() const { 
   // frames[currentFrame]->draw(getX(), getY(),getsScale());
-                std::cout << getName() << " y is: "<<getY()<<std::endl;
-                std::cout << " view is: "<<   Viewport::getInstance().getX()<<", "<< Viewport::getInstance().getY()<<std::endl;
+                // std::cout << getName() << " y is: "<<getY()<<std::endl;
+                // std::cout << " view is: "<<   Viewport::getInstance().getX()<<", "<< Viewport::getInstance().getY()<<std::endl;
 
   frames[currentFrame]->draw(getX(), getY() ,getsScale());
 }
