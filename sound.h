@@ -18,10 +18,11 @@
 
 class SDLSound {
 public:
-  SDLSound();
-  SDLSound(const char * name);
   ~SDLSound();
+   static SDLSound& getInstance();
 
+
+   void update(const char * name);
   void startMusic();
   void stopMusic();      // stop all sounds
   void toggleMusic();    // toggle music on/off
@@ -32,6 +33,8 @@ private:
   Mix_Music *music;
   // Mix_Music *jurassicMusic;
   // Mix_Music *spongebobMusic;
+  SDLSound();
+  SDLSound(const char * name);
 
   int audioRate;
   int audioChannels;

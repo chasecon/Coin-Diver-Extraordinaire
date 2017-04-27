@@ -37,6 +37,7 @@ Engine::Engine(string choice) :
   spritesMiddle(),
   spritesFront(),
   spritesExplosion(),
+  coins(),
   currentSprite(-1),
   player(new Player(choice,1.0,0.5,100,500)),
   hud(new Hud("hud")),
@@ -46,7 +47,9 @@ Engine::Engine(string choice) :
   strategy( new PerPixelCollisionStrategy ),
   waitTimer(0),
   ignore(),
-  sound("sound/oblivionIntro.wav")
+  ignoreCoins(),
+  // sound("sound/oblivionIntro.wav")
+  sound(SDLSound::getInstance())
 {
   string villian="angler";
   string npc1 = "tuna";
@@ -134,16 +137,16 @@ Engine::Engine(string choice) :
 
 
 
-  spritesFront.push_back( new StayingMultiSprite("coin",170,900));
-  spritesFront.push_back( new StayingMultiSprite("coin",190,900));
-  spritesFront.push_back( new StayingMultiSprite("coin",210,900));
-  spritesFront.push_back( new StayingMultiSprite("coin",230,900));
-  spritesFront.push_back( new StayingMultiSprite("coin",250,900));
-  spritesFront.push_back( new StayingMultiSprite("coin",1480,900));
-  spritesFront.push_back( new StayingMultiSprite("coin",1500,900));
-  spritesFront.push_back( new StayingMultiSprite("coin",1520,900));
-  spritesFront.push_back( new StayingMultiSprite("coin",1540,900));
-  spritesFront.push_back( new StayingMultiSprite("coin",1560,900));
+  coins.push_back( new StayingMultiSprite("coin",170,900));
+  coins.push_back( new StayingMultiSprite("coin",190,900));
+  coins.push_back( new StayingMultiSprite("coin",210,900));
+  coins.push_back( new StayingMultiSprite("coin",230,900));
+  coins.push_back( new StayingMultiSprite("coin",250,900));
+  coins.push_back( new StayingMultiSprite("coin",1480,900));
+  coins.push_back( new StayingMultiSprite("coin",1500,900));
+  coins.push_back( new StayingMultiSprite("coin",1520,900));
+  coins.push_back( new StayingMultiSprite("coin",1540,900));
+  coins.push_back( new StayingMultiSprite("coin",1560,900));
 
   spritesFront.push_back( new TurningMultiSprite(villian,1.0,3.0));
   spritesFront.push_back( new TurningMultiSprite("missle"));
@@ -199,8 +202,8 @@ void Engine::checkForCollisions() {
     if ( strategy->execute(*player, **it) ) {
 
       if(!ignore[counter] && (hud->getHealth()>0) ){
-        srand (time(NULL));
 
+        srand (time(NULL));
         sound[11+(rand()%5)];
 
         hud->setHealth(hud->getHealth()-10) ;
@@ -233,6 +236,36 @@ void Engine::checkForCollisions() {
     ++it;
     counter++;
   }
+counter=0;
+//check all coins
+it = coins.begin();
+
+  while ( it != coins.end() ) {
+
+    if ( strategy->execute(*player, **it) ) {
+
+      if(!ignoreCoins[counter] && (hud->getHealth()>0) ){
+
+        sound[10];
+        hud->setScore(hud->getScore()+1) ;
+        showHud=true;
+        ignoreCoins[counter]=1;
+        const Sprite s(coins[counter],coins[counter]);
+
+        Drawable* boom = new ExplodingSprite(s);
+        delete coins[counter];
+
+        coins[counter] = boom;
+      }
+
+    }
+    ++it;
+    counter++;
+  }
+
+
+
+
 }
 
 void Engine::draw() const {
@@ -244,6 +277,7 @@ void Engine::draw() const {
 
   worldA.draw();
   for(auto* s : spritesFront) s->draw();
+  for(auto* s : coins) s->draw();
 
   io.writeText(Gamedata::getInstance().getXmlStr("name"), 0, Gamedata::getInstance().getXmlInt("view/height")-30,{255, 255, 0, 255 });
 
@@ -278,6 +312,7 @@ void Engine::update(Uint32 ticks) {
   for(auto* s : spritesBack) s->update(ticks);
   for(auto* s : spritesMiddle) s->update(ticks);
   for(auto* s : spritesFront) s->update(ticks);
+  for(auto* s : coins) s->update(ticks);
   worldC.update();
   worldB.update();
   worldA.update();
@@ -293,7 +328,7 @@ void Engine::switchSprite(){
 
 
 int Engine::play() {
-
+sound.update("sound/oblivionIntro.wav");
 sound.startMusic();
             sound[2];
 

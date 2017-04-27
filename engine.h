@@ -50,6 +50,7 @@ private:
   std::vector<Drawable*> spritesMiddle;
   std::vector<Drawable*> spritesFront;
   std::vector<Drawable*> spritesExplosion;
+  std::vector<Drawable*> coins;
 
   int currentSprite;
   //bool makeVideo;
@@ -64,7 +65,8 @@ private:
   CollisionStrategy* strategy;
   int waitTimer;
   std::map<int,int> ignore;
-  SDLSound sound;
+  std::map<int,int> ignoreCoins;
+  SDLSound& sound;
   Engine(const Engine&)=delete;
   Engine& operator=(const Engine&)=delete;
     void checkForCollisions();

@@ -409,7 +409,7 @@
 <hud>
   <startLoc x="15" y="60"/>
   <width>200</width>
-  <height>230</height>
+  <height>250</height>
   <transparency>true</transparency>
 </hud>
 

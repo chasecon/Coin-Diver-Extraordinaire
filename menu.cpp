@@ -150,7 +150,8 @@ spritesGood[0]->setX(0);
 spritesBad[0]->setX(300);
 spritesThing[0]->setX(300);
 
-  SDLSound sound("sound/pokemonIntro.wav");
+  // SDLSound sound("sound/pokemonIntro.wav");
+  SDLSound& sound = SDLSound::getInstance();
 
 sound.startMusic();
 

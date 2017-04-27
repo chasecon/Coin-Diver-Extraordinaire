@@ -13,7 +13,7 @@
 class Hud : public Drawable {
 public:
   Hud(const std::string&);
-  Hud(const Hud&);
+  // Hud(const Hud&);
   ~Hud();
   Hud& operator=(const Hud&);
 
@@ -23,6 +23,8 @@ public:
   virtual void update(Uint32 ticks);
   const Frame* getFrame() const{return NULL;};
 
+  int getScore() const{return score;}
+  void setScore(int s) { score=s;}
   int getLives() const{return playerLives;}
   int getHealth() const{return playerHealth;}
   void setLives(int lives) { playerLives=lives;}
@@ -52,6 +54,7 @@ float playerX;
 float playerY;
 int playerH;
 int playerW;
+int score;
 
 };
 #endif

@@ -4,6 +4,12 @@
 #include "sound.h"
 using std::string;
 
+
+SDLSound& SDLSound::getInstance(){
+  static SDLSound instance;
+  return instance;
+}
+
 SDLSound::~SDLSound() {
   std::cout << "Cleaning up sounds ..." << std::endl;
   std::clock_t start = std::clock();
@@ -22,7 +28,9 @@ SDLSound::SDLSound() :
   SDLSound("sound/pokemonIntro.wav")
 {}
 
-  
+void  SDLSound::update(const char *name){
+    music = Mix_LoadMUS(name);
+  }
 
 SDLSound::SDLSound(const char *name) : 
   volume(SDL_MIX_MAXVOLUME/4), 
@@ -68,17 +76,17 @@ SDLSound::SDLSound(const char *name) :
   sounds.push_back( Mix_LoadWAV("sound/coin.wav") );
   volumeBoost[sounds.size()-1]=0;
   sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );
-  volumeBoost[sounds.size()-1]=0;
+  volumeBoost[sounds.size()-1]=-25;
     sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );
-  volumeBoost[sounds.size()-1]=0;
+  volumeBoost[sounds.size()-1]=-25;
     sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );
-  volumeBoost[sounds.size()-1]=0;
+  volumeBoost[sounds.size()-1]=-25;
     sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );
-  volumeBoost[sounds.size()-1]=0;
+  volumeBoost[sounds.size()-1]=-25;
     sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );
-  volumeBoost[sounds.size()-1]=0;
+  volumeBoost[sounds.size()-1]=-25;
     sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );
-  volumeBoost[sounds.size()-1]=0;
+  volumeBoost[sounds.size()-1]=-25;
   sounds.push_back( Mix_LoadWAV("sound/finish.wav") );
   volumeBoost[sounds.size()-1]=0;
   for (unsigned int i = 0; i < sounds.size(); ++i) channels.push_back(i);
