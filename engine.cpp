@@ -192,12 +192,16 @@ void Engine::checkForCollisions() {
         delete spritesFront[counter];
 
         spritesFront[counter] = boom;
-        sound[1];
+        srand (time(NULL));
+
+        sound[11+(rand()%5)];
     }
     if ( strategy->execute(*player, **it) ) {
 
       if(!ignore[counter] && (hud->getHealth()>0) ){
-        sound[1];
+        srand (time(NULL));
+
+        sound[11+(rand()%5)];
 
         hud->setHealth(hud->getHealth()-10) ;
         showHud=true;
