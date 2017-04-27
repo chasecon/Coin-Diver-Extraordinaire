@@ -14,31 +14,12 @@ public:
 };
 
 Engine::~Engine() { 
-
   std::cout << "Terminating program" << std::endl;
-  //std::vector<Drawable*>::iterator it = sprites.begin();
-  //while ( it != sprites.end() ) {
-  for(auto it : sprites){
-    delete it;
-  }
-  for(auto it : spritesBack){
-   // std::cout << it << " , " << it->getName()<< " deleted" << std::endl;
-    delete it;
-    //++it;
-  }
-  for(auto it : spritesMiddle){
-   // std::cout << it << " , " << it->getName()<< " deleted" << std::endl;
-    delete it;
-    //++it;
-  }
-  for(auto it : spritesFront){
-   // std::cout << it << " , " << it->getName()<< " deleted" << std::endl;
-    delete it;
-    //++it;
-  }
-  //delete player;
+  for(auto it : sprites){ delete it; }
+  for(auto it : spritesBack){ delete it; }
+  for(auto it : spritesMiddle){ delete it; }
+  for(auto it : spritesFront){ delete it; }
   delete hud;
-
 }
 
 Engine::Engine(string choice) :
@@ -57,8 +38,6 @@ Engine::Engine(string choice) :
   spritesFront(),
   spritesExplosion(),
   currentSprite(-1),
-  //makeVideo( false ),
-  //player(new Player(choice,1.0,1.0,100,500)),
   player(new Player(choice,1.0,0.5,100,500)),
   hud(new Hud("hud")),
   showHud(true),
@@ -66,27 +45,28 @@ Engine::Engine(string choice) :
   playerType(choice),
   strategy( new PerPixelCollisionStrategy ),
   waitTimer(0),
-  ignore()
+  ignore(),
+  sound("sound/oblivionIntro.wav")
 {
   string villian="angler";
   string npc1 = "tuna";
   string npc2 = "fish";
 
-if(choice == "spongebob"){
-  player->setsScale(3.0);
-  villian="bigJelly";
-  npc1="jelly";
-  npc2="jelly";
-}else if(choice == "yee"){
-    player->setsScale(0.2);
-    villian="flyDino";
-    npc1="flyDino";
-    npc2="flyDino";
+  if(choice == "spongebob"){
+    player->setsScale(3.0);
+    villian="bigJelly";
+    npc1="jelly";
+    npc2="jelly";
+  }else if(choice == "yee"){
+      player->setsScale(0.2);
+      villian="flyDino";
+      npc1="flyDino";
+      npc2="flyDino";
 
-}else if(choice == "diver"){
-    player->setsScale(0.5);
+  }else if(choice == "diver"){
+      player->setsScale(0.5);
 
-}
+  }
 
   constexpr float u = 0.8f; //Mean size
   constexpr float d = 0.3f; //Std deviation
@@ -98,61 +78,55 @@ if(choice == "spongebob"){
   unsigned int numM = Gamedata::getInstance().getXmlInt("numMiddle");
   unsigned int numF = Gamedata::getInstance().getXmlInt("numFront");
 
-for ( unsigned int i = 0; i < numB; ++i ) {
-    auto* s = new TurningMultiSprite("seagull");
-    float scale = dist(mt);
-    while(scale > 0.33f) scale = dist(mt);
-    s->setScale(scale);
-    spritesBack.push_back(s);
-  }
-for ( unsigned int i = 0; i < numM; ++i ) {
-  string name = "";
-  if(i%2==0){ 
-      name = npc1;   
+//create seagulls
+  for ( unsigned int i = 0; i < numB; ++i ) {
+      auto* s = new TurningMultiSprite("seagull");
+      float scale = dist(mt);
+      while(scale > 0.33f) scale = dist(mt);
+      s->setScale(scale);
+      spritesBack.push_back(s);
     }
-    else{    
-      name=npc2;
-    }
-    auto* s = new TurningMultiSprite(name);
+//create middle layer fish
+  for ( unsigned int i = 0; i < numM; ++i ) {
+    string name = "";
+    if(i%2==0){ 
+        name = npc1;   
+      }
+      else{    
+        name=npc2;
+      }
+      auto* s = new TurningMultiSprite(name);
 
-    float scale = dist(mt);
-    while((scale < 0.2f) || (scale > 0.5f)) scale = dist(mt);
-    s->setScale(scale);
-    spritesMiddle.push_back(s);
-  }
-for ( unsigned int i = 0; i < numF; ++i ) {
-  string name = "";
-  if(i%2==0){ 
-      name = npc1;   
+      float scale = dist(mt);
+      while((scale < 0.2f) || (scale > 0.5f)) scale = dist(mt);
+      s->setScale(scale);
+      spritesMiddle.push_back(s);
     }
-    else{    
-      name=npc2;
+//create front fish
+  for ( unsigned int i = 0; i < numF; ++i ) {
+    string name = "";
+    if(i%2==0){ 
+        name = npc1;   
+      }
+      else{    
+        name=npc2;
+      }
+      auto* s = new TurningMultiSprite(name);
+      float scale = dist(mt);
+      while(scale < 0.66f) scale = dist(mt);
+      s->setScale(scale);
+      if(i==0)s->setsScale(7.0);
+      spritesFront.push_back(s);
     }
-    auto* s = new TurningMultiSprite(name);
-    float scale = dist(mt);
-    while(scale < 0.66f) scale = dist(mt);
-    s->setScale(scale);
-    if(i==0)s->setsScale(7.0);
-    spritesFront.push_back(s);
-  }
 
 
-std::vector<Drawable*>::iterator ptr = spritesBack.begin();
- // ++ptr;
+  std::vector<Drawable*>::iterator ptr = spritesBack.begin();
   sort(ptr, spritesBack.end(), SpriteLess());
-  // for ( Drawable* sprite : sprites ) {
-  //   Sprite* thisone = dynamic_cast<Sprite*>(sprite);
-  //   if ( thisone ) {
-  //     std::cout << thisone->getsScale() << std::endl;
-  //   }
-  // }
+
   ptr = spritesMiddle.begin();
- // ++ptr;
   sort(ptr, spritesMiddle.end(), SpriteLess());
 
-
   ptr = spritesFront.begin();
- // ++ptr;
   sort(ptr, spritesFront.end(), SpriteLess());
 
   sprites.push_back(player);
@@ -206,9 +180,9 @@ std::vector<Drawable*>::iterator ptr = spritesBack.begin();
 void Engine::checkForCollisions() {
   std::vector<Drawable*>::const_iterator it = spritesFront.begin();
   Drawable* player = sprites[0];
-// ++it;
+
   int counter=0;
- // static int ignore[100]={};
+
   while ( it != spritesFront.end() ) {
     if(!ignore[counter] && dynamic_cast<Player*>(player)->collidedWith(*it)){
         ignore[counter]=1;
@@ -218,13 +192,12 @@ void Engine::checkForCollisions() {
         delete spritesFront[counter];
 
         spritesFront[counter] = boom;
-
-
+        sound[1];
     }
     if ( strategy->execute(*player, **it) ) {
 
-//*it
       if(!ignore[counter] && (hud->getHealth()>0) ){
+        sound[1];
 
         hud->setHealth(hud->getHealth()-10) ;
         showHud=true;
@@ -237,24 +210,20 @@ void Engine::checkForCollisions() {
         spritesFront[counter] = boom;
 
         if(hud->getHealth()==0){
+          sound[3];
           hud->setLives(hud->getLives()-1);
           const Sprite s(sprites[0],sprites[0]);
 
           Drawable* boom = new ExplodingSprite(s);
-          //delete sprites[0];
 
           spritesExplosion.push_back(boom);
           waitTimer=1;
-          // this->player->stopY();
-          // this->player->stopX();
+
 
         }
 
 
       }
-    //std::cout<<boom->getsScale() << std::endl;
-
-    //std::cout <<  spritesFront[counter]->getName()<<std::endl;
 
     }
     ++it;
@@ -272,12 +241,6 @@ void Engine::draw() const {
   worldA.draw();
   for(auto* s : spritesFront) s->draw();
 
-  //std::stringstream strm;
-  //std::cout <<clock.getAvgFps() <<std::endl;
-  // strm << "fps: " << clock.getFps() << " | Avg FPS: "<<clock.getAvgFps();
-  // io.writeText(strm.str(), 15, 50);
-  // io.writeText("Chase Conklin", 350, 50,{0xff, 0, 0, 0});
-  // io.writeText(Gamedata::getInstance().getXmlStr("username"), 15,25);
   io.writeText(Gamedata::getInstance().getXmlStr("name"), 0, Gamedata::getInstance().getXmlInt("view/height")-30,{255, 255, 0, 255 });
 
   io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), 15,0);
@@ -326,12 +289,10 @@ void Engine::switchSprite(){
 
 
 int Engine::play() {
-  //clock.startClock();
-  //clock.unpause();
 
-  SDLSound sound("sound/oblivionIntro.wav");
-  //sound[2];
 sound.startMusic();
+            sound[2];
+
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -352,26 +313,7 @@ sound.startMusic();
         {
           if ( clock.isPaused() ) clock.unpause();
           else clock.pause();
-        }
-          /*
-          if ( keystate[SDL_SCANCODE_S] ) {
-            clock.toggleSloMo();
-          }
-          */
-
-          if ( keystate[SDL_SCANCODE_E] ) {
-
-             const Sprite s(spritesFront[20],spritesFront[20]);
-
-           Drawable* boom = new ExplodingSprite(s);
-           delete spritesFront[20];
-
-          spritesFront[20] = boom;
-
-
-
-          }
-          
+        }          
                   
           if ( keystate[SDL_SCANCODE_R] ) {
 
@@ -382,6 +324,7 @@ sound.startMusic();
           }
           if ( keystate[SDL_SCANCODE_SPACE] ) {
               player->shoot();
+              sound[0];
           }
           
           if ( keystate[SDL_SCANCODE_T] ) 
@@ -412,6 +355,8 @@ sound.startMusic();
           if(waitTimer == 200){
             waitTimer = 0;
             hud->setHealth(100);
+            sound[2];
+
           }
         }
 
@@ -429,7 +374,7 @@ sound.startMusic();
         }
 
         if (keystate[SDL_SCANCODE_LSHIFT] || keystate[SDL_SCANCODE_RSHIFT]) {
-          //PLAYER SPEED DOUBLE
+          //PLAYER SPEED DOUBLE ?
         }
 if(hud->getHealth()>0){
 
@@ -457,14 +402,12 @@ if(hud->getHealth()>0){
       draw();
       update(ticks);
       checkForCollisions();
-      //if ( makeVideo ) {
       if(frameGen.getBool()){
         frameGen.makeFrame();
       
       }
     }
   }
-  //clock.pause();
   return 0;
 }
 

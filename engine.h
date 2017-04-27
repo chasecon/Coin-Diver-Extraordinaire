@@ -61,10 +61,10 @@ private:
   bool showHud;
   int hudTicks;
   string playerType;
-    CollisionStrategy* strategy;
-    int waitTimer;
-    std::map<int,int> ignore;
-
+  CollisionStrategy* strategy;
+  int waitTimer;
+  std::map<int,int> ignore;
+  SDLSound sound;
   Engine(const Engine&)=delete;
   Engine& operator=(const Engine&)=delete;
     void checkForCollisions();

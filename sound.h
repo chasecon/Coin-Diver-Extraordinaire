@@ -1,7 +1,7 @@
 #include <vector>
 #include <SDL.h>
 #include <SDL_mixer.h>
-
+#include <map>
 // In this demo, we use Mix_Music *Mix_LoadMUS(const char *file)
 // Where file is the name of the music file to use. 
 //
@@ -40,5 +40,7 @@ private:
   std::vector<int> channels;
   SDLSound(const SDLSound&);
   SDLSound& operator=(const SDLSound&);
+  std::map<int,int> volumeBoost;
+
 };
 
