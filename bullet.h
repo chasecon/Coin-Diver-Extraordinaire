@@ -14,16 +14,17 @@ public:
     tooFar(false) 
   { 
 if(name=="mineDrop"){
+  std::cout << "mine dopopopopopping"<<std::endl;
   setScale(0.3);
 }
 
   }
 
-    explicit Bullet(const string& name,double scale) :
-    Sprite(name,scale,scale), 
-    distance(0), 
-    maxDistance(Gamedata::getInstance().getXmlInt(name+"/distance")), 
-    tooFar(false) 
+  explicit Bullet(const string& name,double scale) :
+  Sprite(name,scale,scale), 
+  distance(0), 
+  maxDistance(Gamedata::getInstance().getXmlInt(name+"/distance")), 
+  tooFar(false) 
   { }
   virtual void update(Uint32 ticks);
   bool goneTooFar() const { return tooFar; }

@@ -103,7 +103,7 @@
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
   <speedY>200</speedY>
-  <bullet>mineDrop</bullet>
+  <bullet>raybeam</bullet>
   <transparency>true</transparency>
   <chunk>
   <size>9</size>
@@ -238,7 +238,7 @@
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
   <speedY>0</speedY>
-      <bullet>mineDrop</bullet>
+  <bullet>mineDrop</bullet>
   <transparency>true</transparency>
     <chunk>
   <size>9</size>

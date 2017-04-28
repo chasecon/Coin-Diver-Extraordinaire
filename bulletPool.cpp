@@ -51,7 +51,7 @@ bool BulletPool::collidedWith(const Drawable* obj) const {
 void BulletPool::shoot(const Vector2f& position, const Vector2f& velocity) {
 	if (timeSinceLastFrame > frameInterval) {
     // If no bullets in pool, make one:
-    
+
     if ( freeList.empty() ) {
       Bullet b(name);
       b.setPosition( position );

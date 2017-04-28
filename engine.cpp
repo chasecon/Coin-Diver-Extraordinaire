@@ -20,6 +20,7 @@ Engine::~Engine() {
   for(auto it : spritesMiddle){ delete it; }
   for(auto it : spritesFront){ delete it; }
   delete hud;
+  delete strategy;
 }
 
 Engine::Engine(string choice) :
