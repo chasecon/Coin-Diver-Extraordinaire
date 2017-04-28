@@ -103,15 +103,21 @@ void Sprite::draw() const {
 }
 
 void Sprite::update(Uint32 ticks) { 
+// if(getName()=="mineDrop"){
+// setVelocityY(200);
+// setScale(0.15);
+// }
+
+  //std::cout <<getName()<<", "<<getsScale()<<std::endl;
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
 
-  if ( getY() < 0) {
-    setVelocityY( std::abs( getVelocityY() ) );
-  }
-  if ( getY() > worldHeight-frameHeight) {
-    setVelocityY( -std::abs( getVelocityY() ) );
-  }
+  // if ( getY() < 0) {
+  //   setVelocityY( std::abs( getVelocityY() ) );
+  // }
+  // if ( getY() > worldHeight-frameHeight) {
+  //   setVelocityY( -std::abs( getVelocityY() ) );
+  // }
 
   if ( getX() < 0) {
     setVelocityX( std::abs( getVelocityX() ) );

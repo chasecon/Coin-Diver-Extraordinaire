@@ -35,6 +35,13 @@ float distance(float x1, float y1, float x2, float y2) {
     if(name == "malloyTop"){
       setY(70);
       setX(100);
+    }else if(name == "mmalloyLeft"){
+      setY(300);
+      setX(0);
+    }
+        if(name == "malloyRight"){
+      setY(400);
+      setX(2000);
     }
 
 
@@ -42,6 +49,8 @@ float distance(float x1, float y1, float x2, float y2) {
 
 
 void SmartSprite::shoot() { 
+
+  if(getName()=="malloyTop"){
   float x; 
   float y;
   // I'm not adding minSpeed to y velocity:
@@ -49,14 +58,47 @@ void SmartSprite::shoot() {
   if(getVelocityX() >= 0 && frames == framesRight){
       x = getX()+(getScale()*getFrame()->getWidth());
       y = getY()+(getScale()*getFrame()->getHeight()/2);
-      vNew = Vector2f(minSpeed+getVelocityX(), 0);
+      vNew = Vector2f(0, 200);
     }
     else{ 
-      vNew = Vector2f(getVelocityX() -minSpeed , 0);
+      vNew = Vector2f(0,200);
       x = getX()-15;
       y = getY()+(getScale()*getFrame()->getHeight()/2);
     }
   bullets.shoot( Vector2f(x, y), vNew);
+}else if(getName()=="mmalloyLeft"){
+    float x; 
+  float y;
+  // I'm not adding minSpeed to y velocity:
+  Vector2f vNew;
+  if(getVelocityX() >= 0 && frames == framesRight){
+      x = getX()+(getScale()*getFrame()->getWidth());
+      y = getY()+(getScale()*getFrame()->getHeight()/2);
+      vNew = Vector2f(200, 0);
+    }
+    else{ 
+      vNew = Vector2f(200,0);
+      x = getX()-15;
+      y = getY()+(getScale()*getFrame()->getHeight()/2);
+    }
+  bullets.shoot( Vector2f(x, y), vNew);
+}else if(getName() == "malloyRight"){
+    float x; 
+  float y;
+  // I'm not adding minSpeed to y velocity:
+  Vector2f vNew;
+  if(getVelocityX() >= 0 && frames == framesRight){
+      x = getX()+(getScale()*getFrame()->getWidth());
+      y = getY()+(getScale()*getFrame()->getHeight()/2);
+      vNew = Vector2f(-200, 0);
+    }
+    else{ 
+      vNew = Vector2f(-200,0);
+      x = getX()-15;
+      y = getY()+(getScale()*getFrame()->getHeight()/2);
+    }
+  bullets.shoot( Vector2f(x, y), vNew);
+}
 }
 
 bool SmartSprite::collidedWith(const Drawable* obj) const {
@@ -78,6 +120,8 @@ void SmartSprite::draw() const {
   // std::stringstream strm;
   // strm << currentMode;
   // io.printMessageBlackAt( strm.str(), x, y); 
+    bullets.draw();
+
 }
 
 void SmartSprite::update(Uint32 ticks) {

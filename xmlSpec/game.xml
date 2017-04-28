@@ -251,6 +251,46 @@
   <frames>3</frames>
 </malloyTopLeft>
 
+<mmalloyLeft>
+  <file>images/malloy.png</file>
+  <startLoc x="0" y="400"/>
+  <frames>3</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>0</speedX>
+  <speedY>200</speedY>
+  <bullet>villianMissleLeft</bullet>
+  <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
+</mmalloyLeft>
+
+<mmalloyLeftLeft>
+  <file>images/malloyLeft.png</file>
+  <frames>3</frames>
+</mmalloyLeftLeft>
+
+<malloyRight>
+  <file>images/malloy.png</file>
+  <startLoc x="900" y="400"/>
+  <frames>3</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>0</speedX>
+  <speedY>200</speedY>
+  <bullet>villianMissleRight</bullet>
+  <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
+</malloyRight>
+
+<malloyRightLeft>
+  <file>images/malloyLeft.png</file>
+  <frames>3</frames>
+</malloyRightLeft>
+
 <bigJelly>
   <file>images/bigJelly.png</file>
   <startLoc x="600" y="600"/>
@@ -392,12 +432,32 @@
 <mineDrop>
   <file>images/mine.png</file>
   <interval>300</interval>
-  <distance>320</distance>
+  <distance>900</distance>
   <startLoc x="100" y="100"/>
   <speedX>0</speedX>
-  <speedY>200</speedY>
+  <speedY>-200</speedY>
   <strategy>rectangular</strategy>
 </mineDrop>
+
+<villianMissleLeft>
+  <file>images/villianMissleRight.png</file>
+  <interval>300</interval>
+  <distance>900</distance>
+  <startLoc x="100" y="100"/>
+  <speedX>-200</speedX>
+  <speedY>0</speedY>
+  <strategy>rectangular</strategy>
+</villianMissleLeft>
+
+<villianMissleRight>
+  <file>images/villianMissleLeft.png</file>
+  <interval>300</interval>
+  <distance>900</distance>
+  <startLoc x="100" y="100"/>
+  <speedX>200</speedX>
+  <speedY>0</speedY>
+  <strategy>rectangular</strategy>
+</villianMissleRight>
 
 
 <mine>

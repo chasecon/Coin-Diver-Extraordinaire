@@ -151,19 +151,19 @@ Engine::Engine(string choice) :
   coins.push_back( new StayingMultiSprite("coin",1540,900));
   coins.push_back( new StayingMultiSprite("coin",1560,900));
 
-  spritesFront.push_back( new TurningMultiSprite(villian,1.0,3.0));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));  
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));  
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("missle"));
+  //spritesFront.push_back( new TurningMultiSprite(villian,1.0,3.0));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));  
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));  
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
+  // spritesFront.push_back( new TurningMultiSprite("missle"));
   // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
   // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
   // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
@@ -176,6 +176,8 @@ Engine::Engine(string choice) :
   // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
   //spritesFront.push_back( new SmartSprite("jelly",0.3,1.0,hud));
   enemies.push_back( new SmartSprite("malloyTop",0.3,1.0,hud));
+  enemies.push_back( new SmartSprite("mmalloyLeft",0.3,1.0,hud));
+  enemies.push_back( new SmartSprite("malloyRight",0.3,1.0,hud));
 
 
 
@@ -188,6 +190,12 @@ void Engine::checkForCollisions() {
   Drawable* player = sprites[0];
 
   int counter=0;
+
+
+
+
+
+
 
   while ( it != spritesFront.end() ) {
     if(!ignore[counter] && dynamic_cast<Player*>(player)->collidedWith(*it)){
@@ -407,12 +415,18 @@ sound.startMusic();
 
         if(mineTimer >=0){
           mineTimer++;
-          if(mineTimer == 250){
+          if(mineTimer == 100){
             mineTimer = 0;
             //enemy drop mine
             enemies[0]->shoot();
-            std::cout << "drop mine"<<std::endl;
+            enemies[1]->shoot();
+            enemies[2]->shoot();
           }
+          // if(mineTimer == 125){
+          //   //enemy drop mine
+          //   enemies[1]->shoot();
+          //   enemies[2]->shoot();
+          // }
         }
 
         if(showHud){
