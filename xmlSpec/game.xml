@@ -103,7 +103,7 @@
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
   <speedY>200</speedY>
-  <bullet>raybeam</bullet>
+  <bullet>mineDrop</bullet>
   <transparency>true</transparency>
   <chunk>
   <size>9</size>
@@ -218,6 +218,7 @@
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
   <speedY>200</speedY>
+    <bullet>mine</bullet>
   <transparency>true</transparency>
     <chunk>
   <size>9</size>
@@ -237,6 +238,7 @@
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
   <speedY>0</speedY>
+      <bullet>mineDrop</bullet>
   <transparency>true</transparency>
     <chunk>
   <size>9</size>
@@ -386,6 +388,17 @@
   <file>images/missleLeft.png</file>
   <frames>13</frames>
 </missleLeft>
+
+<mineDrop>
+  <file>images/mine.png</file>
+  <interval>300</interval>
+  <distance>320</distance>
+  <startLoc x="100" y="100"/>
+  <speedX>0</speedX>
+  <speedY>200</speedY>
+  <strategy>rectangular</strategy>
+</mineDrop>
+
 
 <mine>
   <file>images/mine.png</file>

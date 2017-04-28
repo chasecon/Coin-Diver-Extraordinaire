@@ -1,8 +1,10 @@
+#ifndef SMARTSPRITE__H
+#define SMARTSPRITE__H
 #include <iostream>
 #include "turningMultiSprite.h"
 //#include "ioMod.h"
 #include "hud.h"
-
+#include "bulletPool.h"
 // SmartSprite is an observer of subject SubjectSprite, which
 // in this example is a spinning star.
 
@@ -19,6 +21,8 @@ public:
   void goRight();
   void goUp();
   void goDown();
+  void shoot();
+  virtual bool collidedWith(const Drawable*) const;
 
 
 private:	
@@ -26,4 +30,8 @@ private:
   Hud* hud;
   SmartSprite(const SmartSprite &);
   SmartSprite& operator=(const SmartSprite &rhs);
+  std::string bulletName;
+  BulletPool bullets;
+    float minSpeed;
 };
+#endif

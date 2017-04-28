@@ -38,6 +38,7 @@ Engine::Engine(string choice) :
   spritesFront(),
   spritesExplosion(),
   coins(),
+  enemies(),
   currentSprite(-1),
   player(new Player(choice,1.0,0.5,100,500)),
   hud(new Hud("hud")),
@@ -46,6 +47,7 @@ Engine::Engine(string choice) :
   playerType(choice),
   strategy( new PerPixelCollisionStrategy ),
   waitTimer(0),
+  mineTimer(0),
   ignore(),
   ignoreCoins(),
   // sound("sound/oblivionIntro.wav")
@@ -161,18 +163,18 @@ Engine::Engine(string choice) :
   spritesFront.push_back( new TurningMultiSprite("missle"));
   spritesFront.push_back( new TurningMultiSprite("missle"));
   spritesFront.push_back( new TurningMultiSprite("missle"));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  spritesFront.push_back( new SmartSprite("jelly",0.3,1.0,hud));
-  spritesFront.push_back( new SmartSprite("malloyTop",0.3,1.0,hud));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  //spritesFront.push_back( new SmartSprite("jelly",0.3,1.0,hud));
+  enemies.push_back( new SmartSprite("malloyTop",0.3,1.0,hud));
 
 
 
@@ -278,6 +280,7 @@ void Engine::draw() const {
   worldA.draw();
   for(auto* s : spritesFront) s->draw();
   for(auto* s : coins) s->draw();
+  for(auto* s : enemies) s->draw();
 
   io.writeText(Gamedata::getInstance().getXmlStr("name"), 0, Gamedata::getInstance().getXmlInt("view/height")-30,{255, 255, 0, 255 });
 
@@ -313,6 +316,8 @@ void Engine::update(Uint32 ticks) {
   for(auto* s : spritesMiddle) s->update(ticks);
   for(auto* s : spritesFront) s->update(ticks);
   for(auto* s : coins) s->update(ticks);
+  for(auto* s : enemies) s->update(ticks);
+
   worldC.update();
   worldB.update();
   worldA.update();
@@ -396,6 +401,16 @@ sound.startMusic();
             hud->setHealth(100);
             sound[2];
 
+          }
+        }
+
+        if(mineTimer >=0){
+          mineTimer++;
+          if(mineTimer == 250){
+            mineTimer = 0;
+            //enemy drop mine
+            enemies[0]->shoot();
+            std::cout << "drop mine"<<std::endl;
           }
         }
 

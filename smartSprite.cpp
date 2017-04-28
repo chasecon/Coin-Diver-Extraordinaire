@@ -17,11 +17,51 @@ float distance(float x1, float y1, float x2, float y2) {
 //  io(IOManager::getInstance())
 // { }
 //, io( IOManager::getInstance() )
-  SmartSprite::SmartSprite(const std::string& name, Hud* h) : TurningMultiSprite(name),hud(h) {}
+  SmartSprite::SmartSprite(const std::string& name, Hud* h) : TurningMultiSprite(name),hud(h),
+  bulletName( Gamedata::getInstance().getXmlStr(name+"/bullet") ),
+  bullets( bulletName ),
+  minSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/speedX") ) {}
 
-  SmartSprite::SmartSprite(const std::string& name, float vScale, Hud* h) : TurningMultiSprite(name,vScale),hud(h){}
+  SmartSprite::SmartSprite(const std::string& name, float vScale, Hud* h) : TurningMultiSprite(name,vScale),hud(h),
+  bulletName( Gamedata::getInstance().getXmlStr(name+"/bullet") ),
+  bullets( bulletName ),
+  minSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/speedX") ){}
 
-  SmartSprite::SmartSprite(const std::string& name, float vScale, float sScale, Hud* h) : TurningMultiSprite(name,vScale,sScale),hud(h){}
+  SmartSprite::SmartSprite(const std::string& name, float vScale, float sScale, Hud* h) : TurningMultiSprite(name,vScale,sScale),hud(h),
+  bulletName( Gamedata::getInstance().getXmlStr(name+"/bullet") ),
+  bullets( bulletName ),
+  minSpeed( Gamedata::getInstance().getXmlInt(bulletName+"/speedX") ){
+
+    if(name == "malloyTop"){
+      setY(70);
+      setX(100);
+    }
+
+
+  }
+
+
+void SmartSprite::shoot() { 
+  float x; 
+  float y;
+  // I'm not adding minSpeed to y velocity:
+  Vector2f vNew;
+  if(getVelocityX() >= 0 && frames == framesRight){
+      x = getX()+(getScale()*getFrame()->getWidth());
+      y = getY()+(getScale()*getFrame()->getHeight()/2);
+      vNew = Vector2f(minSpeed+getVelocityX(), 0);
+    }
+    else{ 
+      vNew = Vector2f(getVelocityX() -minSpeed , 0);
+      x = getX()-15;
+      y = getY()+(getScale()*getFrame()->getHeight()/2);
+    }
+  bullets.shoot( Vector2f(x, y), vNew);
+}
+
+bool SmartSprite::collidedWith(const Drawable* obj) const {
+  return bullets.collidedWith( obj );
+}
 
 
 void SmartSprite::goLeft()  { 
@@ -42,6 +82,8 @@ void SmartSprite::draw() const {
 
 void SmartSprite::update(Uint32 ticks) {
   TurningMultiSprite::update(ticks);
+      bullets.update(ticks);
+
   float x= getX()+getFrame()->getWidth()/2;
   float y= getY()+getFrame()->getHeight()/2;
   // float ex= playerPos[0]+playerWidth/2;
@@ -63,4 +105,5 @@ void SmartSprite::update(Uint32 ticks) {
     
   
 }
+
 

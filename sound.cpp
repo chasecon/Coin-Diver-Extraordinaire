@@ -104,7 +104,7 @@ void SDLSound::toggleMusic() {
   } 
 }
 
-void SDLSound::operator[](int index) {
+void SDLSound::operator[](int index) {  
   if (currentSound >= 0) Mix_HaltChannel(currentSound);
   currentSound = index;
   Mix_VolumeChunk(sounds[index], volume+volumeBoost[index]);

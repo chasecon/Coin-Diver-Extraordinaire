@@ -51,6 +51,7 @@ private:
   std::vector<Drawable*> spritesFront;
   std::vector<Drawable*> spritesExplosion;
   std::vector<Drawable*> coins;
+  std::vector<SmartSprite*> enemies;
 
   int currentSprite;
   //bool makeVideo;
@@ -64,6 +65,7 @@ private:
   string playerType;
   CollisionStrategy* strategy;
   int waitTimer;
+  int mineTimer;
   std::map<int,int> ignore;
   std::map<int,int> ignoreCoins;
   SDLSound& sound;
