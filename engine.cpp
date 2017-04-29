@@ -241,9 +241,11 @@ void Engine::checkForCollisions() {
         }
 
 
+
       }
 
     }
+
     ++it;
     counter++;
   }
@@ -273,6 +275,13 @@ it = coins.begin();
     ++it;
     counter++;
   }
+
+for(auto e: enemies){
+  if(dynamic_cast<SmartSprite*>(e)->collidedWith(player))
+    std::cout<<"MINE HIT ME"<<std::endl;
+  it++;
+
+}
 
 
 

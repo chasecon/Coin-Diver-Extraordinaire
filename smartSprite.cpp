@@ -101,7 +101,7 @@ void SmartSprite::shoot() {
 }
 }
 
-bool SmartSprite::collidedWith(const Drawable* obj) const {
+bool SmartSprite::collidedWith( Drawable* obj) const {
   return bullets.collidedWith( obj );
 }
 
