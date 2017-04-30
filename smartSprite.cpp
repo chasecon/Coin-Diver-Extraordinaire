@@ -104,6 +104,9 @@ void SmartSprite::shoot() {
 bool SmartSprite::collidedWith( Drawable* obj)  {
   return bullets.collidedWith( obj );
 }
+bool SmartSprite::collidedWith( BulletPool* bulls)  {
+  return bullets.collidedWith( bulls );
+}
 
 
 void SmartSprite::goLeft()  { 

@@ -54,6 +54,22 @@ bool BulletPool::collidedWith(const Drawable* obj)  {
   }
   return false;
 }
+bool BulletPool::collidedWith( BulletPool* bullets)  {
+  std::list<Bullet>::iterator ptr = bulletList.begin();
+  while (ptr != bulletList.end()) {
+    const Bullet p = *ptr;
+    if ( bullets->collidedWith(&p) ) {
+      freeList.push_back(*ptr);
+      const Sprite s(static_cast<Bullet>(*ptr));
+      
+      explodedBullets.push_back(new ExplodingSprite(s));
+      ptr = bulletList.erase(ptr);
+      return true;
+    }
+    ++ptr;
+  }
+  return false;
+}
 
 
 void BulletPool::shoot(const Vector2f& position, const Vector2f& velocity) {

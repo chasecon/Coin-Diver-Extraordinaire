@@ -23,6 +23,7 @@ public:
   void goDown();
   void shoot();
   virtual bool collidedWith( Drawable*) ;
+  virtual bool collidedWith( BulletPool*) ;
 
 
 private:	

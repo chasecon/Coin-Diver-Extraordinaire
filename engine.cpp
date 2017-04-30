@@ -278,8 +278,14 @@ for(auto e: enemies){
     hud->setHealth(hud->getHealth()-10);
     showHud=true;
   }
-  it++;
+  
+  if(dynamic_cast<SmartSprite*>(e)->collidedWith(static_cast<Player*>(player)->getBullets())){
+    sound[11+(rand()%5)];
+    hud->setScore(hud->getScore()+1);
+    showHud=true;
+  }
 }
+
 
 }
 

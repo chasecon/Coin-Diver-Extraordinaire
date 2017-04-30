@@ -35,6 +35,7 @@ public:
   void speedUp();
   void speedDown();
   void shoot();
+  BulletPool *getBullets() {return &bullets;}
 
 protected:
   bool xPressed;
