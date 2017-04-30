@@ -4,6 +4,7 @@
 #include <list>
 #include "bullet.h"
 #include "collisionStrategy.h"
+#include <vector>
 
 class BulletPool {
 public:
@@ -17,7 +18,8 @@ public:
   unsigned int bulletCount() const { return bulletList.size(); }
   unsigned int freeCount()  const { return freeList.size(); }
   bool shooting() const { return bulletList.empty(); }
-  bool collidedWith(const Drawable* obj) const;
+  bool collidedWith(const Drawable* obj) ;
+
 private:
   std::string name;
   CollisionStrategy* strategy;
@@ -25,7 +27,7 @@ private:
   float timeSinceLastFrame;
   mutable std::list<Bullet> bulletList; // BulletPool is a list of Bullet
   mutable std::list<Bullet> freeList;   // when a Bullet is out of range
-
+  std::vector<Drawable*> explodedBullets;
   BulletPool& operator=(const BulletPool&);   // (Item 6)
 };
 #endif

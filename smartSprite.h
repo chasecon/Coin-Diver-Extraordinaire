@@ -22,7 +22,7 @@ public:
   void goUp();
   void goDown();
   void shoot();
-  virtual bool collidedWith( Drawable*) const;
+  virtual bool collidedWith( Drawable*) ;
 
 
 private:	

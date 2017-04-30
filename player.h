@@ -21,7 +21,7 @@ public:
     virtual void draw() const;
 
   virtual void update(Uint32 ticks);
-  virtual bool collidedWith(const Drawable*) const;
+  virtual bool collidedWith(const Drawable*) ;
   /*virtual const Frame* getFrame() const { 
     return frames[currentFrame]; 
   }

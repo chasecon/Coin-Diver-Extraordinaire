@@ -49,6 +49,21 @@ Sprite::Sprite(const std::string& name, const Frame* f,const double vs, const do
   frameWidth(frame->getWidth()),
   frameHeight(frame->getHeight())
 { }
+Sprite::Sprite(const std::string& name,const double vs, const double ss, float x, float y) :
+  Drawable(name,
+           Vector2f(x,y), 
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"), 
+                    Gamedata::getInstance().getXmlInt(name+"/speedY")),
+           vs,
+           ss 
+           ),
+  frame( RenderContext::getInstance()->getFrame(name) ),
+  worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+  frameWidth(frame->getWidth()),
+  frameHeight(frame->getHeight())
+{ }
+
 
 Sprite::Sprite(const Drawable* d,const Drawable* dd) :
   Drawable(d->getName(),

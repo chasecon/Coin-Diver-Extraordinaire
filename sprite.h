@@ -10,6 +10,8 @@ public:
   Sprite(const std::string& name, const Frame* f);
 Sprite(const std::string& name, const double vs, const double ss);
 Sprite(const std::string& name, const Frame* f,const double vs, const double ss);
+Sprite(const std::string& name,const double vs, const double ss, float x, float y);
+
 Sprite(const Drawable* d, const Drawable* dd);
 
   virtual ~Sprite() { } 

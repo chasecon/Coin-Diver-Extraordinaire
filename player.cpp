@@ -149,7 +149,7 @@ void Player::shoot() {
   bullets.shoot( Vector2f(x, y), vNew);
 }
 
-bool Player::collidedWith(const Drawable* obj) const {
+bool Player::collidedWith(const Drawable* obj)  {
   return bullets.collidedWith( obj );
 }
 

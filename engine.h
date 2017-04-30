@@ -52,6 +52,7 @@ private:
   std::vector<Drawable*> spritesExplosion;
   std::vector<Drawable*> coins;
   std::vector<SmartSprite*> enemies;
+  std::vector<Drawable*> explodedMines;
 
   int currentSprite;
   //bool makeVideo;

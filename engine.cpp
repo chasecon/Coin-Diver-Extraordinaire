@@ -19,6 +19,10 @@ Engine::~Engine() {
   for(auto it : spritesBack){ delete it; }
   for(auto it : spritesMiddle){ delete it; }
   for(auto it : spritesFront){ delete it; }
+  for(auto it: coins){delete it;}
+  for(auto it : spritesExplosion){delete it;}
+  for(auto it: enemies){delete it;}
+  for(auto it: explodedMines){delete it;}
   delete hud;
   delete strategy;
 }
@@ -40,6 +44,7 @@ Engine::Engine(string choice) :
   spritesExplosion(),
   coins(),
   enemies(),
+  explodedMines(),
   currentSprite(-1),
   player(new Player(choice,1.0,0.5,100,500)),
   hud(new Hud("hud")),
@@ -193,10 +198,6 @@ void Engine::checkForCollisions() {
 
 
 
-
-
-
-
   while ( it != spritesFront.end() ) {
     if(!ignore[counter] && dynamic_cast<Player*>(player)->collidedWith(*it)){
         ignore[counter]=1;
@@ -239,13 +240,8 @@ void Engine::checkForCollisions() {
 
 
         }
-
-
-
       }
-
     }
-
     ++it;
     counter++;
   }
@@ -260,7 +256,7 @@ it = coins.begin();
       if(!ignoreCoins[counter] && (hud->getHealth()>0) ){
 
         sound[10];
-        hud->setScore(hud->getScore()+1) ;
+        hud->setScore(hud->getScore()+1);
         showHud=true;
         ignoreCoins[counter]=1;
         const Sprite s(coins[counter],coins[counter]);
@@ -275,16 +271,15 @@ it = coins.begin();
     ++it;
     counter++;
   }
-
+//check enemie mines dropped if they hit the player
 for(auto e: enemies){
-  if(dynamic_cast<SmartSprite*>(e)->collidedWith(player))
-    std::cout<<"MINE HIT ME"<<std::endl;
+  if(dynamic_cast<SmartSprite*>(e)->collidedWith(player)){
+    sound[11+(rand()%5)];
+    hud->setHealth(hud->getHealth()-10);
+    showHud=true;
+  }
   it++;
-
 }
-
-
-
 
 }
 
@@ -299,7 +294,7 @@ void Engine::draw() const {
   for(auto* s : spritesFront) s->draw();
   for(auto* s : coins) s->draw();
   for(auto* s : enemies) s->draw();
-
+  for(auto *s : explodedMines)s->draw();
   io.writeText(Gamedata::getInstance().getXmlStr("name"), 0, Gamedata::getInstance().getXmlInt("view/height")-30,{255, 255, 0, 255 });
 
   io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), 15,0);
@@ -335,6 +330,7 @@ void Engine::update(Uint32 ticks) {
   for(auto* s : spritesFront) s->update(ticks);
   for(auto* s : coins) s->update(ticks);
   for(auto* s : enemies) s->update(ticks);
+  for(auto* s : explodedMines) s->update(ticks);
 
   worldC.update();
   worldB.update();

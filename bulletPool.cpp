@@ -3,6 +3,7 @@
 #include <cmath>
 #include "ioMod.h"
 #include "gamedata.h"
+#include "explodingSprite.h"
 #include "bulletPool.h"
 
 CollisionStrategy* getStrategy(const string& name) {
@@ -23,7 +24,8 @@ BulletPool::BulletPool(const std::string& n) :
   frameInterval(Gamedata::getInstance().getXmlInt(name+"/interval")),
   timeSinceLastFrame( 0 ),
   bulletList(),
-  freeList()
+  freeList(),
+  explodedBullets()
 { }
 
 BulletPool::BulletPool(const BulletPool& b) :
@@ -32,21 +34,27 @@ BulletPool::BulletPool(const BulletPool& b) :
   frameInterval(b.frameInterval),
   timeSinceLastFrame( b.timeSinceLastFrame ),
   bulletList(b.bulletList), 
-  freeList(b.freeList)
+  freeList(b.freeList),
+  explodedBullets()
 { }
 
-bool BulletPool::collidedWith(const Drawable* obj) const {
+bool BulletPool::collidedWith(const Drawable* obj)  {
   std::list<Bullet>::iterator ptr = bulletList.begin();
   while (ptr != bulletList.end()) {
     if ( strategy->execute(*ptr, *obj) ) {
       freeList.push_back(*ptr);
+      const Sprite s(static_cast<Bullet>(*ptr));
+      
+      explodedBullets.push_back(new ExplodingSprite(s));
       ptr = bulletList.erase(ptr);
+
       return true;
     }
     ++ptr;
   }
   return false;
 }
+
 
 void BulletPool::shoot(const Vector2f& position, const Vector2f& velocity) {
 	if (timeSinceLastFrame > frameInterval) {
@@ -71,17 +79,20 @@ void BulletPool::shoot(const Vector2f& position, const Vector2f& velocity) {
 }
 
 void BulletPool::draw() const { 
-  std::stringstream stream;
-  stream << "Active bullets: " << bulletList.size();
-  IOmod::getInstance().
-    writeText(stream.str(), 500, 30);
-  stream.clear();
-  stream.str("");
-  stream << "Bullet pool: " << freeList.size();
-  IOmod::getInstance().
-    writeText(stream.str(), 500, 60);
+  if(name == "raybeam"){
+    std::stringstream stream;
+    stream << "Active bullets: " << bulletList.size();
+    IOmod::getInstance().writeText(stream.str(), 500, 30);
+    stream.clear();
+    stream.str("");
+    stream << "Bullet pool: " << freeList.size();
+    IOmod::getInstance().writeText(stream.str(), 500, 60);
+  }
   for ( Bullet bullet : bulletList ) {
     bullet.draw();
+  }
+  for (auto s: explodedBullets){
+    s->draw();
   }
 }
 
@@ -95,5 +106,8 @@ void BulletPool::update(Uint32 ticks) {
       ptr = bulletList.erase(ptr);
     }   
     else ++ptr;
+  }
+  for (auto s: explodedBullets){
+    s->update(ticks);
   }
 }
