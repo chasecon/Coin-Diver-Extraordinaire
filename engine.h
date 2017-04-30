@@ -70,6 +70,10 @@ private:
   std::map<int,int> ignore;
   std::map<int,int> ignoreCoins;
   SDLSound& sound;
+  Sprite *book;
+  bool win;
+  bool won;
+  bool godMode;
   Engine(const Engine&)=delete;
   Engine& operator=(const Engine&)=delete;
     void checkForCollisions();

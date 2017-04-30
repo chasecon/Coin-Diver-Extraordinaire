@@ -130,6 +130,13 @@ void Sprite::update(Uint32 ticks) {
   // if ( getY() < 0) {
   //   setVelocityY( std::abs( getVelocityY() ) );
   // }
+  if(getName() == "bookWin"){
+    if(getY() >= Gamedata::getInstance().getXmlFloat(getName()+"/endspot")){
+        setY(Gamedata::getInstance().getXmlFloat(getName()+"/endspot"));
+        setVelocityY(0);
+    }
+
+  }
   // if ( getY() > worldHeight-frameHeight) {
   //   setVelocityY( -std::abs( getVelocityY() ) );
   // }

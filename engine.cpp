@@ -24,6 +24,7 @@ Engine::~Engine() {
   for(auto it: enemies){delete it;}
   for(auto it: explodedMines){delete it;}
   delete hud;
+  delete book;
   delete strategy;
 }
 
@@ -57,7 +58,11 @@ Engine::Engine(string choice) :
   ignore(),
   ignoreCoins(),
   // sound("sound/oblivionIntro.wav")
-  sound(SDLSound::getInstance())
+  sound(SDLSound::getInstance()),
+  book(new Sprite("bookWin",1.0,0.5)),
+  win(false),
+  won(false),
+  godMode(false)
 {
   string villian="angler";
   string npc1 = "tuna";
@@ -285,6 +290,15 @@ for(auto e: enemies){
     showHud=true;
   }
 }
+if(win){
+  if(strategy->execute(*player, *book)){
+    ExplodingSprite *e = new ExplodingSprite(*book);
+    delete book;
+    book = e;
+    win = false; 
+    won = true;
+  }
+}
 
 
 }
@@ -317,7 +331,29 @@ if(hud->getHealth()>0){
   if(showHud){
     hud->draw();
   }
+  if(win || won)
+    book->draw();
+  
+  if(godMode){
+      std::stringstream ss;
+      ss<<"God Mode ON";
+      io.writeText(ss.str(), Gamedata::getInstance().getXmlInt("view/width")-170, 0,{255, 100, 0, 255});
+     
+  }
+  if(win && !won){
+      std::stringstream ss;
+      ss<<"Go collect the book at the end!";
+      io.writeText(ss.str(), Gamedata::getInstance().getXmlInt("view/width")/2, Gamedata::getInstance().getXmlInt("view/height")/2,{255, 0, 0, 255});
+     
+  }
 
+
+  if(won){
+      std::stringstream ss;
+      ss<<"You Win!";
+      io.writeText(ss.str(), Gamedata::getInstance().getXmlInt("view/width")/2, Gamedata::getInstance().getXmlInt("view/height")/2,{255, 0, 0, 255});
+      hud->setHealth(9999);
+  }
   viewport.draw();
 
   SDL_RenderPresent(renderer);
@@ -337,6 +373,8 @@ void Engine::update(Uint32 ticks) {
   for(auto* s : coins) s->update(ticks);
   for(auto* s : enemies) s->update(ticks);
   for(auto* s : explodedMines) s->update(ticks);
+  if(win || won)
+    book->update(ticks);
 
   worldC.update();
   worldB.update();
@@ -362,6 +400,8 @@ sound.startMusic();
   bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
   while ( !done ) {
+    if(hud->getScore() >=5 && !won)
+      win = true;
     while ( SDL_PollEvent(&event) ) {
       keystate = SDL_GetKeyboardState(NULL);
       if (event.type ==  SDL_QUIT) { done = true; break; }
@@ -384,8 +424,16 @@ sound.startMusic();
             return 1;
           }
           if ( keystate[SDL_SCANCODE_G] ) {
-              hud->setHealth(99999);
+              if(!godMode){
+                hud->setHealth(99999);
+                godMode = true;
+              }
+              else{
+                hud->setHealth(100);
+                godMode = false;
+              }
           }
+
           if ( keystate[SDL_SCANCODE_SPACE] ) {
               player->shoot();
               sound[0];

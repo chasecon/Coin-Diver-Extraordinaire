@@ -391,6 +391,21 @@
   <frames>1</frames>
 </bookLeft>
 
+<bookWin>
+  <file>images/cppBook.png</file>
+  <startLoc x="2500" y="-200"/>
+  <frames>1</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>0</speedX>
+  <speedY>100</speedY>
+  <endspot>650</endspot>
+  <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
+</bookWin>
+
 <flyDino>
   <file>images/flyDino.png</file>
   <startLoc x="200" y="200"/>
