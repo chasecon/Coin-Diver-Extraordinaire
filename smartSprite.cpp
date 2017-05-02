@@ -55,7 +55,7 @@ float distance(float x1, float y1, float x2, float y2) {
 
 void SmartSprite::shoot() { 
 
-  if(getName()=="malloyTop"){
+  if(getName()=="malloyTop" || getName()=="coinBag"){
   float x; 
   float y;
   // I'm not adding minSpeed to y velocity:
@@ -104,6 +104,9 @@ void SmartSprite::shoot() {
     }
   bullets.shoot( Vector2f(x, y), vNew);
 }
+
+
+
 }
 
 bool SmartSprite::collidedWith( Drawable* obj)  {

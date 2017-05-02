@@ -95,6 +95,7 @@ void BulletPool::shoot(const Vector2f& position, const Vector2f& velocity) {
 }
 
 void BulletPool::draw() const { 
+
   if(name == "raybeam"){
     std::stringstream stream;
     stream << "Active bullets: " << bulletList.size();

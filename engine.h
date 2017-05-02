@@ -74,7 +74,6 @@ private:
   bool win;
   bool won;
   bool godMode;
-  SmartSprite *coinBag;
   Engine(const Engine&)=delete;
   Engine& operator=(const Engine&)=delete;
     void checkForCollisions();

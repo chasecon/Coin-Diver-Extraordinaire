@@ -25,7 +25,6 @@ Engine::~Engine() {
   for(auto it: explodedMines){delete it;}
   delete hud;
   delete book;
-  delete coinBag;
   delete strategy;
 }
 
@@ -63,8 +62,7 @@ Engine::Engine(string choice) :
   book(new Sprite("bookWin",1.0,0.5)),
   win(false),
   won(false),
-  godMode(false),
-  coinBag(new SmartSprite("coinBag",1.0,0.3,hud))
+  godMode(false)
 {
   string villian="angler";
   string npc1 = "tuna";
@@ -190,7 +188,7 @@ Engine::Engine(string choice) :
   enemies.push_back( new SmartSprite("malloyTop",0.3,1.0,hud));
   enemies.push_back( new SmartSprite("mmalloyLeft",0.3,1.0,hud));
   enemies.push_back( new SmartSprite("malloyRight",0.3,1.0,hud));
-
+  enemies.push_back( new SmartSprite("coinBag",1.0,0.3,hud));
 
 
   switchSprite();
@@ -335,7 +333,6 @@ void Engine::draw() const {
   for(auto* s : coins) s->draw();
   for(auto* s : enemies) s->draw();
   for(auto *s : explodedMines)s->draw();
-  coinBag->draw();
   io.writeText(Gamedata::getInstance().getXmlStr("name"), 0, Gamedata::getInstance().getXmlInt("view/height")-30,{255, 255, 0, 255 });
 
   io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), 15,0);
@@ -400,7 +397,6 @@ void Engine::update(Uint32 ticks) {
   worldC.update();
   worldB.update();
   worldA.update();
-  coinBag->update(ticks);
   viewport.update(); // always update viewport last
 }
 
@@ -493,11 +489,10 @@ sound.startMusic();
 
           }
         }
-        coinBag->shoot();
         if(mineTimer >=0){
           mineTimer++;
           if(mineTimer == 75){
-            coinBag->shoot();
+            enemies[3]->shoot();
           }
           if(mineTimer == 100){
             mineTimer = 0;
