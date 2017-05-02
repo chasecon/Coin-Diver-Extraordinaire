@@ -279,6 +279,20 @@ it = coins.begin();
 //check enemie mines dropped if they hit the player
 for(auto e: enemies){
 
+
+if(e->getName()=="coinBag"){
+
+  if( (hud->getHealth()>0) ){
+
+  if(dynamic_cast<SmartSprite*>(e)->collidedWith(player) ){
+    sound[10];
+    hud->setScore(hud->getScore()+1);
+    showHud=true;
+  }
+
+}
+
+}else{
   if( (hud->getHealth()>0) ){
 
   if(dynamic_cast<SmartSprite*>(e)->collidedWith(player) ){
@@ -306,7 +320,7 @@ for(auto e: enemies){
         }
 }
 
-
+}
 }
 if(win){
   if(strategy->execute(*player, *book)){

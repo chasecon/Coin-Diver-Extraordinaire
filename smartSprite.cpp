@@ -41,7 +41,7 @@ float distance(float x1, float y1, float x2, float y2) {
     }
         if(name == "malloyRight"){
       setY(400);
-      setX(2000);
+      setX(2800);
     }
     if(name == "coinBag"){
       setX(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"));
@@ -78,7 +78,7 @@ void SmartSprite::shoot() {
   Vector2f vNew;
   if(getVelocityX() >= 0 && frames == framesRight){
       x = getX()+(getScale()*getFrame()->getWidth());
-      y = getY()+(getScale()*getFrame()->getHeight()/2);
+      y = getY()-30+(getScale()*getFrame()->getHeight()/2);
       vNew = Vector2f(200, 0);
     }
     else{ 
@@ -94,7 +94,7 @@ void SmartSprite::shoot() {
   Vector2f vNew;
   if(getVelocityX() >= 0 && frames == framesRight){
       x = getX()+(getScale()*getFrame()->getWidth());
-      y = getY()+(getScale()*getFrame()->getHeight()/2);
+      y = getY()-30+(getScale()*getFrame()->getHeight()/2);
       vNew = Vector2f(-200, 0);
     }
     else{ 
@@ -146,6 +146,30 @@ void SmartSprite::update(Uint32 ticks) {
   float ex= hud->getPlayerX()+hud->getPlayerW()/2;
   float ey= hud->getPlayerY()+hud->getPlayerH()/2;
   //float distanceToEnemy = ::distance( x, y, ex, ey );
+    
+if(getName()=="coinBag"){
+
+
+      if ( std::abs(x-ex)<10){
+
+      }else {
+      if ( x > ex ) {
+        goRight();
+      }else if ( x < ex ) {
+        goLeft(); 
+      }     
+      }
+      if ( y > ey ) goDown();
+      if ( y < ey ) goUp();
+
+          if ( getX() < 0) {
+      setX( 2000  );
+    }
+    if ( getX() > worldWidth-frameWidth) {
+      setX(0 );
+    }  
+
+}else{
       if ( std::abs(x-ex)<10){
 
       }else {
@@ -157,7 +181,7 @@ void SmartSprite::update(Uint32 ticks) {
       }
       if ( y > ey ) goUp();
       if ( y < ey ) goDown();
-    
+    }
   
 }
 

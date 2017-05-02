@@ -464,7 +464,7 @@
 <villianMissleLeft>
   <file>images/villianMissleRight.png</file>
   <interval>300</interval>
-  <distance>2000</distance>
+  <distance>2800</distance>
   <startLoc x="100" y="100"/>
   <speedX>-200</speedX>
   <speedY>0</speedY>
@@ -478,7 +478,7 @@
 <villianMissleRight>
   <file>images/villianMissleLeft.png</file>
   <interval>300</interval>
-  <distance>2000</distance>
+  <distance>2800</distance>
   <startLoc x="100" y="100"/>
   <speedX>200</speedX>
   <speedY>0</speedY>
@@ -545,7 +545,7 @@
 </krabbyPatty>
 
 <coinBullet>
-  <file>images/coinBag.png</file>
+  <file>images/coinSingle.png</file>
   <interval>300</interval>
   <distance>900</distance>
   <startLoc x="100" y="100"/>
