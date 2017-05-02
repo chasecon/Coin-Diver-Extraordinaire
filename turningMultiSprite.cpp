@@ -157,6 +157,8 @@ TurningMultiSprite::TurningMultiSprite( const std::string& name, float vScale, f
 TurningMultiSprite::TurningMultiSprite(const TurningMultiSprite& s) :
   Drawable(s), 
   frames(s.frames),
+  framesRight( RenderContext::getInstance()->getFrames(s.getName()) ),
+  framesLeft( RenderContext::getInstance()->getFrames(s.getName()+"Left") ),
   currentFrame(s.currentFrame),
   numberOfFrames( s.numberOfFrames ),
   frameInterval( s.frameInterval ),
