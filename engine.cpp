@@ -24,6 +24,7 @@ Engine::~Engine() {
   for(auto it: enemies){delete it;}
   for(auto it: explodedMines){delete it;}
   delete hud;
+  delete player;
   delete book;
   delete strategy;
 }
