@@ -25,6 +25,7 @@ Engine::~Engine() {
   for(auto it: explodedMines){delete it;}
   delete hud;
   delete book;
+  delete dropper;
   delete strategy;
 }
 
@@ -62,7 +63,8 @@ Engine::Engine(string choice) :
   book(new Sprite("bookWin",1.0,0.5)),
   win(false),
   won(false),
-  godMode(false)
+  godMode(false),
+  dropper(new CoinDropper("coinDropper"))
 {
   string villian="angler";
   string npc1 = "tuna";
@@ -379,6 +381,7 @@ void Engine::update(Uint32 ticks) {
   worldC.update();
   worldB.update();
   worldA.update();
+  dropper->update(ticks);
   viewport.update(); // always update viewport last
 }
 
