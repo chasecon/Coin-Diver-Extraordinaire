@@ -83,15 +83,17 @@ void Menu::draw() {
 
   io.writeText(strm.str(), 25, HEIGHT-50,{255, 0, 0, 255 });
 
-  io.writeText("W,A,S,D to choose settings", 5, 5,{255, 0, 0, 255 });
+  io.writeText("W and S to navigate the menu, ENTER to choose level.", 5, 5,{255, 0, 0, 255 });
+  io.writeText("Get points by gathering points and shooting missles, mines, and large fish.", 5, 30,{0, 0, 0, 255 });
+  io.writeText("Get 50 points for the enemy to release your C++ book, grab it to win!", 5, 55,{0, 0, 0, 255 });
   io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), (WIDTH/2)-150,(HEIGHT/4)-50,{255, 0, 0, 255 });
  	io.writeText("---------------------------", (WIDTH/2)-150,(HEIGHT/4)-15,{255, 0, 0, 255 });
   io.writeText("Malloy Diver", (WIDTH/2)-150,(HEIGHT/4)+15,{255, 0, 0, 255 });
   io.writeText("Spongebob Diver", (WIDTH/2)-150,(HEIGHT/4)+45,{255, 0, 0, 255 });
-  io.writeText("DinosaurVille (YeeVille)", (WIDTH/2)-150,(HEIGHT/4)+75,{255, 0, 0, 255 });
+  io.writeText("DinosaurVille (YeeVille) BETA", (WIDTH/2)-150,(HEIGHT/4)+75,{255, 0, 0, 255 });
   io.writeText("*", (WIDTH/2)-160,(HEIGHT/4)+20+choice,{255, 0, 0, 255 });
 
-  io.writeText("Chase Conklin", 25, HEIGHT-25,{0xff, 0, 0, 0});
+  io.writeText("Chase Conklin and Stephen Linnell", 25, HEIGHT-25,{0xff, 0, 0, 0});
   //for(auto* s : sprites) s->draw();
 
     SDL_RenderPresent(renderer);

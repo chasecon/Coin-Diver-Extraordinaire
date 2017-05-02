@@ -84,11 +84,14 @@ double Clock::getAvgFps() const {
 
   if ( frames<=max) {
     times.push(getTicks());
+        std::cout <<(1.0*max)/(( times.back() - times.front() )/1000.0)<<std::endl;
+
     return 0.0;
   }
   else {
     times.pop();
     times.push(getTicks());
+   // std::cout <<(1.0*max)/(( times.back() - times.front() )/1000.0)<<std::endl;
     //std::cout << (double)(((1.0)*max)/ (float)(( times.back() - times.front() )/1000.0) )  <<std::endl;
     return ((1.0*max)/(( times.back() - times.front() )/1000.0) );  
 
