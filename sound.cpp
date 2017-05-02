@@ -40,7 +40,8 @@ SDLSound::SDLSound(const char *name) :
   audioChannels(2), 
   audioBuffers(4096),
   sounds(),
-  channels() 
+  channels(),
+volumeBoost()
 {
 
   if(Mix_OpenAudio(audioRate, MIX_DEFAULT_FORMAT, audioChannels, 

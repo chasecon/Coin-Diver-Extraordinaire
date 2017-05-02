@@ -39,7 +39,7 @@ public:
   void setPlayerW(int w){playerW=w;}
 protected:
 Clock& clock;
-
+Hud(const Hud&);
 const IOmod& io;
 const RenderContext* rc;
 
