@@ -461,28 +461,28 @@
 <villianMissleLeft>
   <file>images/villianMissleRight.png</file>
   <interval>300</interval>
-  <distance>900</distance>
+  <distance>2000</distance>
   <startLoc x="100" y="100"/>
   <speedX>-200</speedX>
   <speedY>0</speedY>
   <strategy>rectangular</strategy>
       <chunk>
   <size>15</size>
-  <distance>200</distance>
+  <distance>100</distance>
 </chunk>
 </villianMissleLeft>
 
 <villianMissleRight>
   <file>images/villianMissleLeft.png</file>
   <interval>300</interval>
-  <distance>900</distance>
+  <distance>2000</distance>
   <startLoc x="100" y="100"/>
   <speedX>200</speedX>
   <speedY>0</speedY>
   <strategy>rectangular</strategy>
       <chunk>
   <size>15</size>
-  <distance>200</distance>
+  <distance>100</distance>
 </chunk>
 </villianMissleRight>
 

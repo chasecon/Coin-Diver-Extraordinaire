@@ -278,7 +278,10 @@ it = coins.begin();
   }
 //check enemie mines dropped if they hit the player
 for(auto e: enemies){
-  if(dynamic_cast<SmartSprite*>(e)->collidedWith(player)){
+
+  if( (hud->getHealth()>0) ){
+
+  if(dynamic_cast<SmartSprite*>(e)->collidedWith(player) ){
     sound[11+(rand()%5)];
     hud->setHealth(hud->getHealth()-10);
     showHud=true;
@@ -289,6 +292,21 @@ for(auto e: enemies){
     hud->setScore(hud->getScore()+1);
     showHud=true;
   }
+          if(hud->getHealth()==0){
+          sound[3];
+          hud->setLives(hud->getLives()-1);
+          const Sprite s(sprites[0],sprites[0]);
+
+          Drawable* boom = new ExplodingSprite(s);
+
+          spritesExplosion.push_back(boom);
+          waitTimer=1;
+
+
+        }
+}
+
+
 }
 if(win){
   if(strategy->execute(*player, *book)){
