@@ -30,7 +30,6 @@ OBJS = \
 	bulletPool.o \
 	menuSprite.o \
 	menu.o \
-	coinDropper.o \
 	hud.o \
 	sound.o \
 	player.o \

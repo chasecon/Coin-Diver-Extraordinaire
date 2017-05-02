@@ -26,7 +26,6 @@
 #include "smartSprite.h"
 #include "menuSprite.h"
 #include "sound.h"
-#include "coinDropper.h"
 class Engine {
 public:
   Engine (string choice);
@@ -75,7 +74,6 @@ private:
   bool win;
   bool won;
   bool godMode;
-  CoinDropper *dropper;
   Engine(const Engine&)=delete;
   Engine& operator=(const Engine&)=delete;
     void checkForCollisions();
