@@ -147,11 +147,14 @@
   <frameInterval>100</frameInterval>
   <speedX>-200</speedX>
   <speedY>200</speedY>
+  <strategy>rectangular</strategy>
   <transparency>true</transparency>
     <chunk>
   <size>9</size>
   <distance>200</distance>
 </chunk>
+  <distance>900</distance>
+  <interval>300</interval>
 </coin>
 
 <fish>
@@ -541,6 +544,49 @@
   </chunk>
 </krabbyPatty>
 
+<coinBullet>
+  <file>images/coinBag.png</file>
+  <interval>300</interval>
+  <distance>320</distance>
+  <startLoc x="100" y="100"/>
+  <speedX>0</speedX>
+  <speedY>100</speedY>
+  <strategy>rectangular</strategy>
+  <chunk>
+  <size>9</size>
+  <distance>200</distance>
+  </chunk>
+</coinBullet>
+
+<coinBag>
+  <file>images/coinBag.png</file>
+  <startLoc x="200" y="0"/>
+  <frames>1</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>100</speedX>
+  <speedY>0</speedY>
+  <bullet>coinBullet</bullet>
+  <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
+</coinBag>
+
+<coinBagLeft>
+  <file>images/coinBag.png</file>
+  <startLoc x="200" y="0"/>
+  <frames>1</frames>
+  <frameInterval>0</frameInterval>
+  <speedX>100</speedX>
+  <speedY>0</speedY>
+  <bullet>coin</bullet>
+  <transparency>true</transparency>
+    <chunk>
+  <size>9</size>
+  <distance>200</distance>
+</chunk>
+</coinBagLeft>
 
 
 </GameData>

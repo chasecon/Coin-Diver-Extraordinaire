@@ -25,6 +25,7 @@ Engine::~Engine() {
   for(auto it: explodedMines){delete it;}
   delete hud;
   delete book;
+  delete coinBag;
   delete strategy;
 }
 
@@ -62,7 +63,8 @@ Engine::Engine(string choice) :
   book(new Sprite("bookWin",1.0,0.5)),
   win(false),
   won(false),
-  godMode(false)
+  godMode(false),
+  coinBag(new SmartSprite("coinBag",1.0,0.3,hud))
 {
   string villian="angler";
   string npc1 = "tuna";
@@ -333,6 +335,7 @@ void Engine::draw() const {
   for(auto* s : coins) s->draw();
   for(auto* s : enemies) s->draw();
   for(auto *s : explodedMines)s->draw();
+  coinBag->draw();
   io.writeText(Gamedata::getInstance().getXmlStr("name"), 0, Gamedata::getInstance().getXmlInt("view/height")-30,{255, 255, 0, 255 });
 
   io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), 15,0);
@@ -397,6 +400,7 @@ void Engine::update(Uint32 ticks) {
   worldC.update();
   worldB.update();
   worldA.update();
+  coinBag->update(ticks);
   viewport.update(); // always update viewport last
 }
 
@@ -489,9 +493,12 @@ sound.startMusic();
 
           }
         }
-
+        coinBag->shoot();
         if(mineTimer >=0){
           mineTimer++;
+          if(mineTimer == 75){
+            coinBag->shoot();
+          }
           if(mineTimer == 100){
             mineTimer = 0;
             //enemy drop mine

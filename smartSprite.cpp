@@ -43,6 +43,11 @@ float distance(float x1, float y1, float x2, float y2) {
       setY(400);
       setX(2000);
     }
+    if(name == "coinBag"){
+      setX(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"));
+      setY(Gamedata::getInstance().getXmlInt(name+"/startLoc/y"));
+
+    }
 
 
   }
