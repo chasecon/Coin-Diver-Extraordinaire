@@ -12,7 +12,9 @@ void Menu::fix(){
 }
 
 Menu::~Menu(){
-
+  for(auto it : spritesGood){ delete it; }
+  for(auto it : spritesBad){ delete it; }
+  for(auto it : spritesThing){ delete it; }
 }
 
 Menu::Menu() :
