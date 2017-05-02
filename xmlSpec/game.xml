@@ -535,6 +535,10 @@
   <speedX>200</speedX>
   <speedY>0</speedY>
   <strategy>rectangular</strategy>
+  <chunk>
+  <size>9</size>
+  <distance>200</distance>
+  </chunk>
 </krabbyPatty>
 
 
