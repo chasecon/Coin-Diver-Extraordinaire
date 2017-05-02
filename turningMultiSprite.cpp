@@ -5,25 +5,20 @@
 
 
 Vector2f TurningMultiSprite::makeVelocity(int xv, int yx) const {
-   // float dxv = Gamedata::getInstance().getRandInRange(xv-100,yx+100);
-    //float dyv = Gamedata::getInstance().getRandInRange(xv-100,yx+100);
 
   int dxv = xv;
   int dyx = yx;
-  //int newY = 5 + (rand() % (int)(yx + 1));
-  //int newX = -1*(5 + (rand() % (int)(xv + 1)));
+
   int switcher = (rand() % (int)20);
   int switcher2 = (rand() % (int)20);
   if(switcher%2 == 0){ dxv= dxv * (-1.0);}
   if(switcher2%2 == 0){ dyx= dyx * (-1.0);}
 
     return Vector2f(dxv, dyx);
-    //return Vector2f(newX, newY);
 }
 Vector2f TurningMultiSprite::makeStartCustomVel() const {
 
-  //int newY = 5 + (rand() % (int)(yx + 1));
-  //int newX = -1*(5 + (rand() % (int)(xv + 1)));
+
   int switcherX = (rand() % (int)20);
   int switcherY = (rand() % (int)20);
   float negativeX = 1.0;
@@ -78,8 +73,7 @@ void TurningMultiSprite::advanceFrame(Uint32 ticks) {
 		timeSinceLastFrame = 0;
 	}
 }
-//Gamedata::getInstance().getXmlInt(name+"/startLoc/x"), 
-                    //Gamedata::getInstance().getXmlInt(name+"/startLoc/y")
+
 TurningMultiSprite::TurningMultiSprite( const std::string& name) :
   Drawable(name, 
            makeStartLoc(), 
@@ -100,7 +94,7 @@ TurningMultiSprite::TurningMultiSprite( const std::string& name) :
   frameWidth(frames[0]->getWidth()),
   frameHeight(frames[0]->getHeight())
 { 
-  setPosition(makeStartCustomLoc());//hopefully this works
+  setPosition(makeStartCustomLoc());
   setVelocity(makeStartCustomVel());
 }
 
@@ -150,7 +144,7 @@ TurningMultiSprite::TurningMultiSprite( const std::string& name, float vScale, f
   frameWidth(frames[0]->getWidth()),
   frameHeight(frames[0]->getHeight())
 { 
-  setPosition(makeStartCustomLoc());//hopefully this works
+  setPosition(makeStartCustomLoc());
   setVelocity(makeStartCustomVel());
   }
 

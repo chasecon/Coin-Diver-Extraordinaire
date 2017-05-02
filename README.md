@@ -1,33 +1,33 @@
-Name: 
+Name: GROUP OF 2
 
 	Chase Conklin
+	Stephen Linnell
 
 
 Clemson Email Address:
 
 	caconkl@g.clemson.edu
-
+	slinnel@g.clemson.edu
 
 Project no:
 	
-	4
+	FINAL
 
 
 Project due date:
 
-	4/4/2017 8:00 AM
+	5/2/2017 9:30 PM
 
 
 Project description:
 
-	Adding w,a,s,d commands to make a player movable, also adding painters algorithm and a hud
-
+	Final project including everything from previous projects and more.
 
 The easiest part of this project:
 	
-	overloading the functor to sort my vectors
+	Sounds were pretty easy.
 
 
 Problems that I had in completing this project:
 
-	Getting the sprite Prof. Malloy drew on the board and converting it into a working animated sprite. Finding out where to put the wasd commands was also tricky
+	Getting enemy shooting to hit the player.

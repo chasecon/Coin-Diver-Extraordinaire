@@ -10,7 +10,6 @@
 
 class SmartSprite : public TurningMultiSprite {
 public:
-  //SmartSprite(const std::string&, const Vector2f& pos, int w, int h);
   SmartSprite(const std::string&, Hud* h);
   SmartSprite(const std::string&, float vScale, Hud* h);
   SmartSprite(const std::string&, float vScale, float sScale, Hud* h);
@@ -27,7 +26,6 @@ public:
 
 
 private:	
-  //IOmod& io;	
   Hud* hud;
   SmartSprite(const SmartSprite &);
   SmartSprite& operator=(const SmartSprite &rhs);

@@ -61,9 +61,7 @@ void MenuSprite::update(Uint32 ticks) {
       setY( 300 );
     }
 
-    // if ( getX() < 0) {
-    //   setX(0);
-    // }
+ 
     if ( getX() > Gamedata::getInstance().getXmlInt("view/width")-(getsScale()*(getFrame()->getWidth()))) {
      setX(-(getsScale()*(getFrame()->getWidth())) );
 

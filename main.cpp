@@ -7,7 +7,6 @@ RenderContext* RenderContext::instance = NULL;
 int main(int, char*[]) {
    try {
 
-      // Menu& menu = Menu::getInstance();
       int restart=1;
 
       while(restart){
@@ -15,7 +14,6 @@ int main(int, char*[]) {
          string s = menu.play();
          Engine engine(s);
          restart = engine.play();
-         //menu.fix();
    }
 
 

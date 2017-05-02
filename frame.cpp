@@ -29,7 +29,6 @@ void Frame::draw(int x, int y) const {
 }
 
 void Frame::draw(int x, int y, float scale) const {
-  //std::cout << "draw y: " << y << "viewport y: "<<Viewport::getInstance().getY()<<std::endl;
   x -= Viewport::getInstance().getX();
   y -= Viewport::getInstance().getY();
   int tempHeight = scale*rect.h;

@@ -31,8 +31,7 @@ private:
   int volume;
   int currentSound;
   Mix_Music *music;
-  // Mix_Music *jurassicMusic;
-  // Mix_Music *spongebobMusic;
+
   SDLSound();
   SDLSound(const char * name);
 

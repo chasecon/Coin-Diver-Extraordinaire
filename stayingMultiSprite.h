@@ -13,7 +13,6 @@ public:
   StayingMultiSprite( const std::string& name, int x, int y);
   StayingMultiSprite(const std::string&, int x, int y, const float size);
 
-  //virtual void draw() const;
   virtual void update(Uint32 ticks);
 
 protected:

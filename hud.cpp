@@ -27,18 +27,7 @@ Hud::Hud(const std::string& name) :
   score(0)
 { }
 
-// Hud::Hud(const Hud& s) :
-//   Drawable(s), 
-//     clock( Clock::getInstance() ),
-//     io( IOmod::getInstance() ),
-//     rc( RenderContext::getInstance() ),
-// 	width( s.width ),
-// 	height( s.height ),
-// 	hudRect({(int)getX(),(int)getY(),width,height}),
-//     renderer(rc->getRenderer()),
-//     playerHealth(100),
-//     playerLives(10)
-//   { }
+
 
 void Hud::draw() const { 
 
@@ -58,7 +47,6 @@ void Hud::draw() const {
     strm << "FPS: " << clock.getFps();
 
     strm2 << "Avg FPS: "<<clock.getAvgFps();
-              // std::cout << strm2.str()<<std::endl;
 
     strm3 << "Seconds: "<<clock.getSeconds();
 
@@ -74,9 +62,7 @@ void Hud::draw() const {
   io.writeText(strm5.str(), hudRect.x+5, hudRect.y+185,{255, 0, 0, 255 });
   io.writeText(strm6.str(), hudRect.x+5, hudRect.y+215,{255, 0, 0, 255 });
 
-  	//io.writeText("Chase Conklin", 350, 40,{0xff, 0, 0, 0});
   	io.writeText(Gamedata::getInstance().getXmlStr("username"), hudRect.x+5,hudRect.y+35,{255, 0, 0, 255 });
-  	//io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), hudRect.x+5,hudRect.y+5);
 
 
 }
