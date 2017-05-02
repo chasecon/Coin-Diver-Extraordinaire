@@ -29,6 +29,7 @@ SDLSound::SDLSound() :
 {}
 
 void  SDLSound::update(const char *name){
+  Mix_FreeMusic(music);
     music = Mix_LoadMUS(name);
   }
 
@@ -89,7 +90,7 @@ volumeBoost()
     sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );
   volumeBoost[sounds.size()-1]=-25;
   sounds.push_back( Mix_LoadWAV("sound/finish.wav") );
-  volumeBoost[sounds.size()-1]=0;
+  volumeBoost[sounds.size()-1]=50;
   for (unsigned int i = 0; i < sounds.size(); ++i) channels.push_back(i);
   std::cout << "Music and Sound is loaded" << std::endl;
 

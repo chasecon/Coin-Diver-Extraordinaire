@@ -15,6 +15,8 @@ public:
 
 Engine::~Engine() { 
   std::cout << "Terminating program" << std::endl;
+
+  //player is deleted in here
   for(auto it : sprites){ delete it; }
   for(auto it : spritesBack){ delete it; }
   for(auto it : spritesMiddle){ delete it; }
@@ -24,7 +26,6 @@ Engine::~Engine() {
   for(auto it: enemies){delete it;}
   for(auto it: explodedMines){delete it;}
   delete hud;
-  delete player;
   delete book;
   delete strategy;
 }
@@ -58,7 +59,6 @@ Engine::Engine(string choice) :
   mineTimer(0),
   ignore(),
   ignoreCoins(),
-  // sound("sound/oblivionIntro.wav")
   sound(SDLSound::getInstance()),
   book(new Sprite("bookWin",1.0,0.5)),
   win(false),
@@ -74,14 +74,18 @@ Engine::Engine(string choice) :
     villian="bigJelly";
     npc1="jelly";
     npc2="jelly";
+    sound.update("sound/jellyfishJam.wav");
   }else if(choice == "yee"){
       player->setsScale(0.2);
       villian="flyDino";
       npc1="flyDino";
       npc2="flyDino";
+          sound.update("sound/jurrasicParkTheme.wav");
+
 
   }else if(choice == "diver"){
       player->setsScale(0.5);
+sound.update("sound/oblivionIntro.wav");
 
   }
 
@@ -150,7 +154,7 @@ Engine::Engine(string choice) :
 
 
 
-
+//starting coins to help score
   coins.push_back( new StayingMultiSprite("coin",170,900));
   coins.push_back( new StayingMultiSprite("coin",190,900));
   coins.push_back( new StayingMultiSprite("coin",210,900));
@@ -162,30 +166,10 @@ Engine::Engine(string choice) :
   coins.push_back( new StayingMultiSprite("coin",1540,900));
   coins.push_back( new StayingMultiSprite("coin",1560,900));
 
-  //spritesFront.push_back( new TurningMultiSprite(villian,1.0,3.0));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));  
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));  
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("missle"));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  // spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
-  //spritesFront.push_back( new SmartSprite("jelly",0.3,1.0,hud));
+  for(int i=0;i<10;i++){
+     spritesFront.push_back( new TurningMultiSprite("missle"));
+     spritesFront.push_back( new TurningMultiSprite("mine",1.0,0.1));
+  }
   enemies.push_back( new SmartSprite("malloyTop",0.3,1.0,hud));
   enemies.push_back( new SmartSprite("mmalloyLeft",0.3,1.0,hud));
   enemies.push_back( new SmartSprite("malloyRight",0.3,1.0,hud));
@@ -330,6 +314,8 @@ if(win){
     book = e;
     win = false; 
     won = true;
+    sound[17];
+    sound.toggleMusic();
   }
 }
 
@@ -415,6 +401,8 @@ void Engine::update(Uint32 ticks) {
   viewport.update(); // always update viewport last
 }
 
+
+//legacy code
 void Engine::switchSprite(){
   currentSprite++;
   currentSprite = currentSprite % sprites.size();
@@ -424,16 +412,22 @@ void Engine::switchSprite(){
 
 
 int Engine::play() {
-sound.update("sound/oblivionIntro.wav");
 sound.startMusic();
-            sound[2];
+
+//different sounds for different players
+if(player->getName()=="diver"){
+  sound[2];
+}else if (player->getName() == "yee"){
+  sound[8];
+}
+
 
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
   while ( !done ) {
-    if(hud->getScore() >=5 && !won)
+    if(hud->getScore() >=30 && !won)
       win = true;
     while ( SDL_PollEvent(&event) ) {
       keystate = SDL_GetKeyboardState(NULL);
@@ -495,12 +489,18 @@ sound.startMusic();
     ticks = clock.getElapsedTicks();
     if ( ticks > 0 ) {
 
+
+//all of the timers for game events
         if(waitTimer >0){
           waitTimer++;
           if(waitTimer == 200){
             waitTimer = 0;
             hud->setHealth(100);
-            sound[2];
+            if(player->getName()=="diver"){
+              sound[2];
+            }else if (player->getName() == "yee"){
+              sound[8];
+            }
 
           }
         }
@@ -511,16 +511,11 @@ sound.startMusic();
           }
           if(mineTimer == 100){
             mineTimer = 0;
-            //enemy drop mine
             enemies[0]->shoot();
             enemies[1]->shoot();
             enemies[2]->shoot();
           }
-          // if(mineTimer == 125){
-          //   //enemy drop mine
-          //   enemies[1]->shoot();
-          //   enemies[2]->shoot();
-          // }
+
         }
 
         if(showHud){
@@ -536,10 +531,9 @@ sound.startMusic();
           hudTicks=0;
         }
 
-        if (keystate[SDL_SCANCODE_LSHIFT] || keystate[SDL_SCANCODE_RSHIFT]) {
-          //PLAYER SPEED DOUBLE ?
-        }
-if(hud->getHealth()>0){
+
+
+  if(hud->getHealth()>0){
 
         if( (keystate[SDL_SCANCODE_W] && keystate[SDL_SCANCODE_S]) || (!keystate[SDL_SCANCODE_W] && !keystate[SDL_SCANCODE_S])){
           player->stopY();
@@ -560,7 +554,7 @@ if(hud->getHealth()>0){
         }else if(keystate[SDL_SCANCODE_D]){
           player->right();
         }
-}
+  }
       clock.incrFrame();
       draw();
       update(ticks);

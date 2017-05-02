@@ -12,9 +12,7 @@ World::World(const std::string& name, int fact) :
 { }
 
 void World::update() {
-    // std::cout << view.getX() << std::endl;
-    // std::cout << factor << std::endl;
-    // std::cout << frameWidth << std::endl;
+
 
   viewX = static_cast<int>(view.getX() / factor) % frameWidth;
   viewY = view.getY();
@@ -24,7 +22,6 @@ void World::update() {
 void World::draw() const { 
    frame->draw(0,0,-viewX,-viewY);
    frame->draw(0,0,frameWidth-viewX,-viewY);
-  // frame->draw(0,0,-Gamedata::getInstance().getXmlInt("world/width"),-Gamedata::getInstance().getXmlInt("world/height"));
-  // frame->draw(0,0,Gamedata::getInstance().getXmlInt("world/width"),-Gamedata::getInstance().getXmlInt("world/height"));
+
 }
 

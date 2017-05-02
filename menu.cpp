@@ -1,10 +1,5 @@
 #include "menu.h"
 
-// Menu& Menu::getInstance(){
-//   static Menu menu;
-//   return menu;
-// }
-
 void Menu::fix(){
           for(auto* s : spritesGood) s->setY(500);
         for(auto* s : spritesBad) s->setY(500);
@@ -72,7 +67,6 @@ void Menu::draw() {
   Viewport::getInstance().setX(0);
   SDL_SetRenderDrawColor(renderer, 0x05,0xff,0xff, 0xff);
   SDL_RenderClear(renderer);
-  //for(auto* s : sprites) s->draw();
 
   spritesGood[chosenPlayerInt]->draw();
   spritesBad[chosenPlayerInt]->draw();
@@ -80,14 +74,13 @@ void Menu::draw() {
 
 
   	std::stringstream strm;
-//    strm << "FPS: " << clock.getFps();
     strm << "Avg FPS: "<<clock.getAvgFps();
 
   io.writeText(strm.str(), 25, HEIGHT-50,{255, 0, 0, 255 });
 
   io.writeText("W and S to navigate the menu, ENTER to choose level.", 5, 5,{255, 0, 0, 255 });
-  io.writeText("Get points by gathering points and shooting missles, mines, and large fish.", 5, 30,{0, 0, 0, 255 });
-  io.writeText("Get 50 points for the enemy to release your C++ book, grab it to win!", 5, 55,{0, 0, 0, 255 });
+  io.writeText("Get points by gathering coins and shooting missles/mines.", 5, 30,{0, 0, 0, 255 });
+  io.writeText("Get 30 points for the enemy to release your C++ book, grab it to win!", 5, 55,{0, 0, 0, 255 });
   io.writeText(Gamedata::getInstance().getXmlStr("screenTitle"), (WIDTH/2)-150,(HEIGHT/4)-50,{255, 0, 0, 255 });
  	io.writeText("---------------------------", (WIDTH/2)-150,(HEIGHT/4)-15,{255, 0, 0, 255 });
   io.writeText("Malloy Diver", (WIDTH/2)-150,(HEIGHT/4)+15,{255, 0, 0, 255 });
@@ -96,7 +89,6 @@ void Menu::draw() {
   io.writeText("*", (WIDTH/2)-160,(HEIGHT/4)+20+choice,{255, 0, 0, 255 });
 
   io.writeText("Chase Conklin and Stephen Linnell", 25, HEIGHT-25,{0xff, 0, 0, 0});
-  //for(auto* s : sprites) s->draw();
 
     SDL_RenderPresent(renderer);
 
@@ -156,7 +148,7 @@ spritesThing[0]->setX(300);
 
   // SDLSound sound("sound/pokemonIntro.wav");
   SDLSound& sound = SDLSound::getInstance();
-
+sound.update("sound/pokemonIntro.wav");
 sound.startMusic();
 
   while ( !done ) {
@@ -217,10 +209,7 @@ sound.startMusic();
         for(auto* s : spritesGood) s->update(ticks);
         for(auto* s : spritesBad) s->update(ticks);
         for(auto* s : spritesThing) s->update(ticks);
-        // for(auto* s : spritesGood) s->setY(300);
-        // for(auto* s : spritesBad) s->setY(300);
-        // for(auto* s : spritesThing) s->setY(300);
-      //update(ticks);
+
       if ( frameGen.getBool()) {
         frameGen.makeFrame();
       }
@@ -236,10 +225,3 @@ return temp;
 }
 
 
-
-// void Hud::update(Uint32 ticks) { 
-// 	if(ticks==0){
-// 		std::cout<<"should never get here" <<std::endl;
-// 	}
-
-// }
