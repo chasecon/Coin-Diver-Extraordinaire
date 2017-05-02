@@ -1,6 +1,6 @@
 #ifndef ENGINE__H
 #define ENGINE__H
-
+#include <algorithm>
 #include <vector>
 #include <SDL.h>
 //#include "ioMod.h"
