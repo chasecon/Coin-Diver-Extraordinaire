@@ -195,7 +195,8 @@ void Engine::checkForCollisions() {
 
         Drawable* boom = new ExplodingSprite(s);
         delete spritesFront[counter];
-
+				showHud=true;
+        hud->setScore(hud->getScore()+1);
         spritesFront[counter] = boom;
         srand (time(NULL));
 
